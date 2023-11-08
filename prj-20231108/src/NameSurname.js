@@ -38,9 +38,9 @@ export default function Description() {
                 <button className="btn btn-outline-secondary" type="button" onClick={addCouple}>Göster</button>
             </div>
 
-            <ul>
+            <ul className="list-group">
                 {couple.map((element, index) => 
-                                <li key={index} style={{margin:'10px'}}>{element.name}: {element.surname}
+                                <li className="list-group-item" key={index} style={{margin:'10px'}}>{element.name}: {element.surname}
                                     <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={() => deleteNameSurname(index)}
                                         >Delete
                                     </button>

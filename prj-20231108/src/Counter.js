@@ -5,7 +5,7 @@ export default function CountFunction() {
 
 
     const increment = () => {
-        setCount(count + 1);
+        setCount(count >= 10 ? 10 : count + 1);
     }
 
     const decrement = () => {

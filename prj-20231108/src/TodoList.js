@@ -15,16 +15,20 @@ export default function TodoList() {
         setTodo(value)
     }
 
+    const deleteTodo = (deleted) => {
+        setTdList(tdList.filter((element) => element !== deleted))
+    }
+
 
     return (
         <div>
             <h3>Görev Listesi</h3>
             <div className="input-group mb-3">
-                <input type="text" className="form-control" onChange={(event) => getTodo(event.target.value)}></input>
+                <input type="text" className="form-control" value={todo} onChange={(event) => getTodo(event.target.value)}></input>
                 <button className="btn btn-outline-secondary" type="button" onClick={addTodoList}>Ekle</button>
             </div>
             <ul>
-                {tdList.map(element => <li>{element}</li>)}
+                {tdList.map(element => <li style={{margin:'10px'}}>{element} <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={() => deleteTodo(element)}>Delete</button></li>)}
             </ul>
         </div>
     )

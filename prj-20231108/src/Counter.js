@@ -9,7 +9,7 @@ export default function CountFunction() {
     }
 
     const decrement = () => {
-        setCount(count - 1);
+        setCount(count <= 0 ? 0 : count - 1);
     }
 
     return (

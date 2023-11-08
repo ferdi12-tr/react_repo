@@ -19,6 +19,13 @@ export default function Description() {
         setCouple(couple.filter((element, index) => deletedIndex !== index))
     }
 
+    const updateNameSurname = (element, updatedIndex) => {
+        setName(element.name)
+        setSurname(element.surname)
+
+        deleteNameSurname(updatedIndex)
+    }
+
     return (
         <div>
             <h3>Ad Soyad Listesi</h3>
@@ -29,7 +36,16 @@ export default function Description() {
             </div>
 
             <ul>
-                {couple.map((element, index) => <li key={index} style={{margin:'10px'}}>{element.name}: {element.surname}<button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={() => deleteNameSurname(index)}>Delete</button></li>)}
+                {couple.map((element, index) => 
+                                <li key={index} style={{margin:'10px'}}>{element.name}: {element.surname}
+                                    <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={() => deleteNameSurname(index)}
+                                        >Delete
+                                    </button>
+                                    <button className="btn btn-success btn-sm" style={{float:'right'}} onClick={() => updateNameSurname(element, index)}
+                                        >Update
+                                    </button>
+                                </li>)
+                }
             </ul>
         </div>
     )

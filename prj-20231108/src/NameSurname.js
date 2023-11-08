@@ -6,12 +6,15 @@ export default function Description() {
 
     const [couple, setCouple] = useState([])
 
+    const checkIfExist = (name, surname) => {
+        return couple.find(element => element.name === name && element.surname === surname)
+    } 
+
     const addCouple = () => {
-        if (name && surname) {
+        if (name && surname && !checkIfExist(name, surname)) {
             setCouple([...couple, {name, surname}])
             setName("")
             setSurname("")
-            console.log(couple)
         }
     }
 

@@ -16,7 +16,7 @@ export default function TodoList() {
     }
 
     const deleteTodo = (deletedIndex) => {
-        setTdList(tdList.filter((element, index) => index != deletedIndex))
+        setTdList(tdList.filter((element, index) => index !== deletedIndex))
     }
 
 

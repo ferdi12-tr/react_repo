@@ -15,8 +15,8 @@ export default function TodoList() {
         setTodo(value)
     }
 
-    const deleteTodo = (deleted) => {
-        setTdList(tdList.filter((element) => element !== deleted))
+    const deleteTodo = (deletedIndex) => {
+        setTdList(tdList.filter((element, index) => index != deletedIndex))
     }
 
 
@@ -28,7 +28,7 @@ export default function TodoList() {
                 <button className="btn btn-outline-secondary" type="button" onClick={addTodoList}>Ekle</button>
             </div>
             <ul>
-                {tdList.map(element => <li style={{margin:'10px'}}>{element} <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={() => deleteTodo(element)}>Delete</button></li>)}
+                {tdList.map((element, index) => <li key={index} style={{margin:'10px'}}>{element} <button className="btn btn-danger btn-sm" style={{float:'right'}} onClick={() => deleteTodo(index)}>Delete</button></li>)}
             </ul>
         </div>
     )

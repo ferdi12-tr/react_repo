@@ -9,13 +9,16 @@ export default function Products() {
 
     const [infoBatchList, setInfoBatchList] = useState([]);
 
+    const [selectedImage, setSelectedImage] = useState(null);
+
     const addBatchToList = () => {
         if (name && category && description && price > 0) {
-            setInfoBatchList([...infoBatchList, {name, category, description, price}]);
+            setInfoBatchList([...infoBatchList, {name, category, description, price, selectedImage}]);
             setName("");
             setCategory("");
             setDescription("");
             setPrice("");
+            setSelectedImage(null)
         }
     }
 
@@ -50,10 +53,14 @@ export default function Products() {
                         <input type="text" className="form-control" value={description} onChange={(event) => setDescription(event.target.value)} placeholder="Product Description"/>
                     </div>
                 </div>
-                <div className="col-3">
+                <div className="col-2">
                     <div className="input-group mb-3">
                         <input type="number" className="form-control" value={price  } onChange={(event) => setPrice(event.target.value)} placeholder="Product Price"/>
                     </div>
+                </div>
+                <div className="col-1">
+                    <label htmlFor="imgUploader" className="btn btn-danger btn-sm">Upload Image</label>
+                    <input style={{ display: "none" }} id="imgUploader" type="file" name="Image" onChange={(event) => setSelectedImage(event.target.files[0])} />
                 </div>
             </div>
             <div className="row mt-3" style={{justifyContent:"center"}}>
@@ -69,19 +76,29 @@ export default function Products() {
                             <div className="col-2"><u>PRICE</u></div>
                     </div>
                     {infoBatchList.map((element, index) => 
-                        <div key={index} className="row mb-3">
-                            <div className="col-2">{element.name}</div>
-                            <div className="col-2">{element.category}</div>
-                            <div className="col-2">{element.description}</div>
-                            <div className="col-2">{element.price} $</div>
-                            <div className="col-2">
-                                <button className="btn btn-warning" onClick={() => editProduct(element, index)}>Edit</button>
+                        <>
+                            <div key={index} className="row mb-3">
+                                <div className="col-2">{element.name}</div>
+                                <div className="col-2">{element.category}</div>
+                                <div className="col-2">{element.description}</div>
+                                <div className="col-2">{element.price} $</div>
+
+                                <div className="col-1">
+                                    <button className="btn btn-warning" onClick={() => editProduct(element, index)}>Edit</button>
+                                </div>
+
+                                <div className="col-1">
+                                    <button className="btn btn-danger" onClick={() => deleteProduct(index)}>Delete</button>
+                                </div>
+
                             </div>
-                            <div className="col-2">
-                                <button className="btn btn-danger" onClick={() => deleteProduct(index)}>Delete</button>
-                            </div>
-                            <hr />
-                        </div>
+                            {element.selectedImage && (
+                                <div className="imageDisplay">
+                                    <img src={URL.createObjectURL(element.selectedImage)} alt="" width={"200px"}/>
+                                </div>)
+                            }
+                            <hr className="mt-3" />
+                        </>
                         )}
                 </div>
             </div>

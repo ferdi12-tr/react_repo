@@ -11,7 +11,13 @@ export default function Description() {
     } 
 
     const addCouple = () => {
-        if (name && surname && !checkIfExist(name, surname)) {
+        if (checkIfExist(name, surname)) {
+            const result = prompt("This person was already added.\n But, if want to add, just type 'yes' otherwise type 'no' ")
+            if (result.toLowerCase() === "no") {
+                return
+            }
+        }
+        if (name && surname) {
             setCouple([...couple, {name, surname}])
             setName("")
             setSurname("")

@@ -6,6 +6,8 @@ export default function CarCard({car}) {
 
     const [modal, setModal] = useState(false);
     const [currentCar, setCurrentCar] = useState(null)
+    const [fromDate, setFromDate] = useState("")
+    const [toDate, setToDate] = useState("")
 
     const toggleModal = (car=null) => {
         setModal(!modal)
@@ -16,6 +18,10 @@ export default function CarCard({car}) {
             setCurrentCar(null)
         }
     };
+
+    const getFromDate = (date) => setFromDate(date);
+    const getToDate = (date) => setToDate(date);
+    
 
     return (
         <><button onClick={() => toggleModal(car)} style={{border:"none", background:"none", padding:0} }>
@@ -30,6 +36,7 @@ export default function CarCard({car}) {
 
         </button>
         <div>
+            {currentCar && 
             <Modal isOpen={modal} toggle={toggleModal} backdrop={true} fade={true}>
                 <ModalHeader toggle={toggleModal}>{"Car Brand: " + currentCar.carBrand + " Car Model: " + currentCar.carModel}</ModalHeader>
                 <ModalBody>
@@ -37,10 +44,10 @@ export default function CarCard({car}) {
                     Car Per Hour Price: {car.price}
                     <FormGroup>
                         <Label for="exampleDate">Date From: </Label>
-                        <Input id="exampleDate" name="date" placeholder="date placeholder" type="date"/>
+                        <Input id="exampleDate" name="date" placeholder="date placeholder" type="date" onChange={(e) => getFromDate(e.target.value)}/>
 
                         <Label for="exampleDate"> Date To: </Label>
-                        <Input id="exampleDate" name="date"  placeholder="date placeholder" type="date"/>
+                        <Input id="exampleDate" name="date"  placeholder="date placeholder" type="date" onChange={(e) => getToDate(e.target.value)}/>
                     </FormGroup>
                 </ModalBody>
 
@@ -52,7 +59,7 @@ export default function CarCard({car}) {
                         Cancel
                     </Button>
                 </ModalFooter>
-            </Modal>
+            </Modal>}
         </div>
         </>
     )

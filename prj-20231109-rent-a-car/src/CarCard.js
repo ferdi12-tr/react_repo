@@ -21,7 +21,7 @@ export default function CarCard({car}) {
 
     const getFromDate = (date) => setFromDate(date);
     const getToDate = (date) => setToDate(date);
-    
+
 
     return (
         <><button onClick={() => toggleModal(car)} style={{border:"none", background:"none", padding:0} }>
@@ -38,10 +38,14 @@ export default function CarCard({car}) {
         <div>
             {currentCar && 
             <Modal isOpen={modal} toggle={toggleModal} backdrop={true} fade={true}>
-                <ModalHeader toggle={toggleModal}>{"Car Brand: " + currentCar.carBrand + " Car Model: " + currentCar.carModel}</ModalHeader>
+                <ModalHeader toggle={toggleModal}>
+                    {"Car Brand: " + currentCar.carBrand + " Car Model: " + currentCar.carModel}
+                </ModalHeader>
                 <ModalBody>
-                    To preceed booking this car, please enter the date to calculate pay amount.
-                    Car Per Hour Price: {car.price}
+                    <img src={car.carUrl} className="card-img" height={"auto"} width={"auto"} alt="..."/>
+                    <p>Be able to book this car, please enter the date to calculate pay amount.</p>
+                    <strong>Car Per Hour Price: {car.price}</strong>
+                    <hr />
                     <FormGroup>
                         <Label for="exampleDate">Date From: </Label>
                         <Input id="exampleDate" name="date" placeholder="date placeholder" type="date" onChange={(e) => getFromDate(e.target.value)}/>

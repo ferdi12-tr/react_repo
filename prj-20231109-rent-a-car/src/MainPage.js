@@ -7,19 +7,19 @@ export default function MainPage() {
     const [id, setId] = useState(0);
     const [carBrand, setCarBrand] = useState("");
     const [carModel, setCarModel] = useState("");
-    const [carPrice, setCarPrice] = useState(0)
+    const [carPrice, setCarPrice] = useState("")
     const [carUrl, setCarUrl] = useState("");
 
     const [carList, setCarList] = useState([]);
 
     const addCar = () => {
-        if (carBrand && carModel && carPrice > 0) {
+        if (carBrand && carModel && Number(carPrice) > 0) {
             setId(id + 1)
             setCarList([...carList, {id, carBrand, carModel, carPrice, carUrl}])
         }
         setCarBrand("");
         setCarModel("");
-        setCarPrice(0);
+        setCarPrice("");
         setCarUrl("");
 
         console.log(carList)

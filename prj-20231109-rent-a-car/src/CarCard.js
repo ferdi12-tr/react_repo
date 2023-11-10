@@ -30,7 +30,7 @@ export default function CarCard({car}) {
                 <img src={car.carUrl} className="card-img" height={"150px"} style={{opacity: 0.7}} alt="..."/>
                 <div className="card-img-overlay">
                     <h5 className="card-title">{car.carModel} - {car.carBrand}</h5>
-                    <p className="card-text"><small>Price: {car.price}</small></p>
+                    <p className="card-text"><small>Price: {car.carPrice} $</small></p>
                 </div>
             </div>
 
@@ -44,7 +44,7 @@ export default function CarCard({car}) {
                 <ModalBody>
                     <img src={car.carUrl} className="card-img" height={"auto"} width={"auto"} alt="..."/>
                     <p>Be able to book this car, please enter the date to calculate pay amount.</p>
-                    <strong>Car Per Hour Price: {car.price}</strong>
+                    <strong>Car Per Hour Price: {car.carPrice} $</strong>
                     <hr />
                     <FormGroup>
                         <Label for="exampleDate">Date From: </Label>

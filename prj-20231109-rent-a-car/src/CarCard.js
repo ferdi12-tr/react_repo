@@ -30,7 +30,7 @@ export default function CarCard({car}) {
                 <img src={car.carUrl} className="card-img" height={"150px"} style={{opacity: 0.7}} alt="..."/>
                 <div className="card-img-overlay">
                     <h5 className="card-title">{car.carModel} - {car.carBrand}</h5>
-                    <p className="card-text"><small>Price: {Number(car.price)}</small></p>
+                    <p className="card-text"><small>Price: {car.price}</small></p>
                 </div>
             </div>
 

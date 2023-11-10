@@ -44,12 +44,14 @@ export default function MainPage() {
                     <button className="btn btn-success mt-3" onClick={addCar}>Add Car</button>
                 </div>
                 <div className="col-9">
-                    <div className="row">
-                        {carList.map((element, index) => 
-                            <div key={index} className="col-3">
-                                <CarCard car={element}/>    
-                            </div>
-                        )}
+                    <div className="container">
+                        <div className="row">
+                            {carList.map((element, index) =>
+                                <div key={index} className="col-3">
+                                    <CarCard car={element}/>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

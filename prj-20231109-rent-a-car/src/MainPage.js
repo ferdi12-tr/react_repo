@@ -47,7 +47,7 @@ export default function MainPage() {
                     <div className="container">
                         <div className="row">
                             {carList.map((element, index) =>
-                                <div key={index} className="col-3">
+                                <div key={index} className="col-6">
                                     <CarCard car={element}/>
                                 </div>
                             )}

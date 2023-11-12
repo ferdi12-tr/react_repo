@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import CarCard from "./CarCard";
+import CarNavBar from "./CarNavBar";
 
 
 export default function MainPage() {
@@ -31,30 +32,32 @@ export default function MainPage() {
     }
 
     return (
-        <div className="container">
-            <div className="row mt-3">
-                <div className="col-3">
-                    <input type="text" className="form-control mt-3" value={carBrand} onChange={(e) => setCarBrand(e.target.value)} placeholder="Brand"/>
-                    <input type="text" className="form-control mt-3" value={carModel} onChange={(e) => setCarModel(e.target.value)} placeholder="Model"/>
-                    <input type="number" className="form-control mt-3" value={carPrice} onChange={(e) => setCarPrice(e.target.value)} placeholder="Price (Per Hour)"/>
+        <>
+            <CarNavBar/>
+            <div className="container">
+                <div className="row mt-3">
+                    <div className="col-3">
+                        <input type="text" className="form-control mt-3" value={carBrand} onChange={(e) => setCarBrand(e.target.value)} placeholder="Brand" />
+                        <input type="text" className="form-control mt-3" value={carModel} onChange={(e) => setCarModel(e.target.value)} placeholder="Model" />
+                        <input type="number" className="form-control mt-3" value={carPrice} onChange={(e) => setCarPrice(e.target.value)} placeholder="Price (Per Hour)" />
 
-                    <label htmlFor="imgUploader"  className="btn btn-danger btn-sm mt-3">Upload Image</label>
-                    <input style={{ display: "none" }} id="imgUploader" type="file" name="Image" onChange={(event) => { GetCarUrl(event.target.files[0])}} /> <br />
+                        <label htmlFor="imgUploader" className="btn btn-danger btn-sm mt-3">Upload Image</label>
+                        <input style={{ display: "none" }} id="imgUploader" type="file" name="Image" onChange={(event) => { GetCarUrl(event.target.files[0]); } } /> <br />
 
-                    <button className="btn btn-success mt-3" onClick={addCar}>Add Car</button>
-                </div>
-                <div className="col-9">
-                    <div className="container">
-                        <div className="row">
-                            {carList.map((element, index) =>
-                                <div key={index} className="col-6">
-                                    <CarCard car={element}/>
+                        <button className="btn btn-success mt-3" onClick={addCar}>Add Car</button>
+                    </div>
+                    <div className="col-9">
+                        <div className="container">
+                            <div className="row">
+                                {carList.map((element, index) => <div key={index} className="col-6">
+                                    <CarCard car={element} />
                                 </div>
-                            )}
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

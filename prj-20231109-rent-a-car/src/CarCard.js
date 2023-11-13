@@ -5,9 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import store from './redux/store';
 import { carAdded, carRemoved } from './redux/actions';
 
-store.subscribe(() => {
-    console.log("store changed", store.getState());
-})
 
 export default function CarCard({car}) {
 

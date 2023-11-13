@@ -3,11 +3,34 @@ import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, Na
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './fkoca_logo.svg';
 
-export default function CarNavBar() {
+import store from "./redux/store";
 
+let setTotalPayAmountFunc;
+
+const calculateTotal = () => {
+    let total = 0;
+    store.getState().forEach(element => {
+        total += Number(element.car.carPrice)
+    });
+    setTotalPayAmountFunc(total);
+    console.log("Total amount: " + total)
+}
+
+const unsubscribe = store.subscribe(calculateTotal);
+
+
+
+
+export default function CarNavBar() {
+    
     const [navbarOpen, setNavbarOpen] = useState(false);
     const navbarToggle = () => setNavbarOpen(!navbarOpen);
+    const [totalPayAmount, setTotalPayAmount] = useState(0);
 
+    setTotalPayAmountFunc = setTotalPayAmount;
+
+
+    
     /* FlexGrow is a temporary solution for aligning item to the right side*/
     return (
         <div>
@@ -35,7 +58,7 @@ export default function CarNavBar() {
                             <NavLink href="#">Sign Up</NavLink>
                         </NavItem>
                         <NavItem> 
-                            <NavLink href="#">Bag</NavLink>
+                            <NavLink href="#">Bag: {totalPayAmount}$</NavLink>
                         </NavItem>
                     </Nav>
                 </Collapse>

@@ -1,6 +1,6 @@
-import { createContext } from 'react'
+import { createStore } from 'redux'
 import reducer from './reducer'
 
-const store = createContext(reducer);
+const store = createStore(reducer);
 
 export default store;

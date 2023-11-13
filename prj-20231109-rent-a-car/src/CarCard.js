@@ -2,6 +2,13 @@ import React, {useState} from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Card, CardImg, CardImgOverlay, CardTitle, CardText, } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import store from './redux/store';
+import { carAdded, carRemoved } from './redux/actions';
+
+store.subscribe(() => {
+    console.log("store changed", store.getState());
+})
+
 export default function CarCard({car}) {
 
     const [modal, setModal] = useState(false);
@@ -17,6 +24,9 @@ export default function CarCard({car}) {
     const getFromDate = (date) => setFromDate(date);
     const getToDate = (date) => setToDate(date);
 
+    const addingDispatcher = () => {
+        store.dispatch(carAdded(currentCar, 10))
+    }
 
     return (
         <>
@@ -56,10 +66,10 @@ export default function CarCard({car}) {
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button color="success" onClick={toggleModal}>
+                        <Button color="success" onClick={() => {toggleModal(); addingDispatcher()}}>
                             Book
                         </Button>
-                        <Button color="danger" onClick={toggleModal}>
+                        <Button color="danger" onClick={() => {toggleModal()}}>
                             Cancel
                         </Button>
                     </ModalFooter>

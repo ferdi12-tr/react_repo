@@ -4,15 +4,6 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-/*
-slice:
-[
-  {
-    car:car, // clicked car object
-    totalHour: 0
-  }
-]
-*/
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

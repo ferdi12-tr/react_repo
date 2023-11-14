@@ -7,6 +7,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header'; 
 import Categories from './Categories';
+import Products from './Products';
 
 export default class App extends React.Component {
 
@@ -66,7 +67,11 @@ export default class App extends React.Component {
               />
           </Col>
           <Col xs="9">
-            category
+            <Products
+                addToCart={this.addToCart}
+                products={this.state.products}
+                currentCategory={this.state.currentCategory}
+              />
           </Col>
         </Row>
       </Container>

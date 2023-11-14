@@ -8,6 +8,7 @@ import {
     NavItem,
     NavLink,
 } from "reactstrap";
+import Cart from "./Cart";
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -39,6 +40,10 @@ export default class Header extends React.Component {
                     <NavItem>
                         <NavLink href="/components/">Components</NavLink>
                     </NavItem>
+                    <Cart
+                        cart={this.props.cart}
+                        removeToCart={this.props.removeToCart}
+                    />
                     </Nav>
                 </Collapse>
             </Navbar>

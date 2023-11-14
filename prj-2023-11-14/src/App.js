@@ -6,6 +6,7 @@ import {
 } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './Header'; 
+import Categories from './Categories';
 
 export default class App extends React.Component {
 
@@ -59,7 +60,10 @@ export default class App extends React.Component {
         </Row>
         <Row>
           <Col xs="3">
-            category
+            <Categories
+                chanceCategory={this.chanceCategory}
+                currentCategory={this.state.currentCategory}
+              />
           </Col>
           <Col xs="9">
             category

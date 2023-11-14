@@ -10,19 +10,37 @@ export default function CarCard({car}) {
 
     const [modal, setModal] = useState(false);
     const [currentCar, setCurrentCar] = useState(null)
+    const [selectedTime, setSelectedTime] = useState("") 
     const [fromDate, setFromDate] = useState("")
     const [toDate, setToDate] = useState("")
+    const [totalHour, setTotalHour] = useState(0);
 
     const toggleModal = (car=null) => {
         setModal(!modal)
         setCurrentCar(car)
+        setSelectedTime("");
+        setFromDate("");
+        setToDate("");
+        setTotalHour(0);
     };
+
+    const modalBookBtn = () => {
+        calculateTotalHour()
+    }
 
     const getFromDate = (date) => setFromDate(date);
     const getToDate = (date) => setToDate(date);
+    const getSelectedTime = (time) => setSelectedTime(time);
+
+    const calculateTotalHour = () => {
+        let datetimefrom = Date.parse(fromDate + " " + selectedTime + ":00")
+        let datetimeto = Date.parse(toDate + " " + selectedTime + ":00")
+
+        setTotalHour((datetimeto - datetimefrom) / (1000 * 3600));
+    }
 
     const addingDispatcher = () => {
-        store.dispatch(carAdded(currentCar, 10))
+        store.dispatch(carAdded(currentCar, totalHour))
     }
 
     return (
@@ -54,19 +72,23 @@ export default function CarCard({car}) {
                         <strong>Car Per Hour Price: {car.carPrice} $</strong>
                         <hr />
                         <FormGroup>
-                            <Label for="exampleDate">Date From: </Label>
-                            <Input id="exampleDate" name="date" placeholder="date placeholder" type="date" onChange={(e) => getFromDate(e.target.value)}/>
+                            <Label for="datefrom">Date From: </Label>
+                            <Input id="datefrom" name="date" placeholder="date placeholder" type="date" onChange={(e) => getFromDate(e.target.value)}/>
 
-                            <Label for="exampleDate"> Date To: </Label>
-                            <Input id="exampleDate" name="date"  placeholder="date placeholder" type="date" onChange={(e) => getToDate(e.target.value)}/>
+                            <Label for="dateto"> Date To: </Label>
+                            <Input id="dateto" name="date"  placeholder="date placeholder" type="date" onChange={(e) => getToDate(e.target.value)}/>
+                        
+                            <Label for="alongtime">Time: </Label>
+                            <Input id="alongtime" name="time"  placeholder="time placeholder" type="time" onChange={(e) => getSelectedTime(e.target.value)}/>
+
                         </FormGroup>
                     </ModalBody>
 
                     <ModalFooter>
-                        <Button color="success" onClick={() => {toggleModal(); addingDispatcher()}}>
+                        <Button color="success" onClick={() => {modalBookBtn(); addingDispatcher();  toggleModal();}}>
                             Book
                         </Button>
-                        <Button color="danger" onClick={() => {toggleModal()}}>
+                        <Button color="danger" onClick={toggleModal}>
                             Cancel
                         </Button>
                     </ModalFooter>

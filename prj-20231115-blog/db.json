@@ -1,0 +1,390 @@
+{
+  "kategoriler": [
+    {
+      "id": 1,
+      "ad": "Teknoloji"
+    },
+    {
+      "id": 2,
+      "ad": "Bilim"
+    },
+    {
+      "id": 3,
+      "ad": "Sanat"
+    },
+    {
+      "id": 4,
+      "ad": "Spor"
+    },
+    {
+      "id": 5,
+      "ad": "Müzik"
+    },
+    {
+      "id": 6,
+      "ad": "Film ve TV"
+    }
+  ],
+  "bloglar": [
+    {
+      "id": 1,
+      "kategoriId": 1,
+      "baslik": "Yeni Teknoloji Trendleri",
+      "aciklama": "Yılın en yeni teknoloji trendlerini keşfedin. Teknoloji dünyasındaki son gelişmeleri ve gelecek vadeden teknolojileri bu yazımızda bulabilirsiniz. Yapay zeka, nesnelerin interneti ve diğer önemli konuları ele alıyoruz.",
+      "resim": "https://picsum.photos/800/600",
+      "favoriSayisi": 15,
+      "banner": "1",
+        "date": "2023-01-01",
+      "tag": [
+        "teknoloji",
+        "yapay zeka",
+        "nesnelerin interneti"
+      ]
+    },
+    {
+      "id": 2,
+      "kategoriId": 2,
+      "baslik": "Evrim Teorisi ve Bilimsel Tartışmalar",
+      "aciklama": "Evrim teorisinin bilimsel tartışmalara etkisi. Charles Darwin'in evrim teorisinin günümüzdeki yeri ve bilimsel topluluktaki tartışmaları ele alıyoruz.",
+      "resim": "https://picsum.photos/810/600",
+      "favoriSayisi": 10,
+      "banner": 1,
+      "date": "2023-01-01",
+      "tag": [
+        "evrim",
+        "bilim",
+        "darwin"
+      ]
+    },
+    {
+      "id": 3,
+      "kategoriId": 3,
+      "baslik": "Modern Sanat Akımları",
+      "aciklama": "Sanat dünyasındaki modern akımların incelenmesi. Çağdaş sanatın farklı akımları ve sanatçılarının eserleri üzerine detaylı bir bakış sunuyoruz.",
+      "resim": "https://picsum.photos/801/600",
+      "favoriSayisi": 20,
+      "banner": 0,
+      "date": "2023-05-11",
+      "tag": [
+        "sanat",
+        "çağdaş sanat",
+        "modern sanat"
+      ]
+    },
+    {
+      "id": 4,
+      "kategoriId": 4,
+      "baslik": "Sporun Yararları ve Egzersiz Tüyoları",
+      "aciklama": "Sağlıklı bir yaşam için sporun önemi ve etkili egzersiz tüyoları. Fiziksel aktivitenin beden ve zihin sağlığına olan olumlu etkilerini açıklıyoruz.",
+      "resim": "https://picsum.photos/802/600",
+      "favoriSayisi": 18,
+      "banner": 0,
+        "date": "2023-06-28",
+      "tag": [
+        "spor",
+        "egzersiz",
+        "sağlıklı yaşam"
+      ]
+    },
+    {
+      "id": 5,
+      "kategoriId": 5,
+      "baslik": "En Sevilen Müzik Türleri",
+      "aciklama": "Müzik dünyasının en sevilen türleri ve örnek parçalar. Farklı müzik türlerinin özellikleri ve popülerlik sebeplerini keşfedin.",
+      "resim": "https://picsum.photos/803/600",
+      "favoriSayisi": 22,
+      "banner": 1,
+        "date": "2023-07-15",
+      "tag": [
+        "müzik",
+        "müzik türleri",
+        "popüler müzik"
+      ]
+    },
+    {
+      "id": 6,
+      "kategoriId": 6,
+      "baslik": "2023 Yılında Çıkacak En İyi Filmler",
+      "aciklama": "Gelecek yıl vizyona girecek heyecan verici filmler. 2023'te beklenen ve izleyiciler tarafından merakla beklenen filmleri listeledik.",
+      "resim": "https://picsum.photos/800/601",
+      "favoriSayisi": 17,
+      "banner": 0,
+        "date": "2023-08-01",
+      "tag": [
+        "film",
+        "sinema",
+        "2023"
+      ]
+    },
+    {
+      "id": 7,
+      "kategoriId": 6,
+      "baslik": "Gezi Rehberi: Doğal Güzellikleri Keşfedin",
+      "aciklama": "Dünyanın dört bir yanındaki doğal güzellikleri ziyaret edin. En etkileyici doğa harikalarını ve keşfedilmeye değer yerleri rehberimizde bulabilirsiniz.",
+      "resim": "https://picsum.photos/800/602",
+      "favoriSayisi": 30,
+      "banner": 0,
+        "date": "2023-09-01",
+      "tag": [
+        "gezi",
+        "doğa",
+        "seyahat"
+      ]
+    },
+    {
+      "id": 8,
+      "kategoriId": 2,
+      "baslik": "Son Moda Trendleri",
+      "aciklama": "Sezonun en trend moda parçalarını keşfedin. Moda dünyasındaki son gelişmeleri, tasarımcıların önerilerini ve kombin önerilerini paylaşıyoruz.",
+      "resim": "https://picsum.photos/800/603",
+      "favoriSayisi": 25,
+      "banner": 0,
+        "date": "2023-10-01",
+      "tag": [
+        "moda",
+        "trend",
+        "giyim"
+      ]
+    },
+    {
+      "id": 9,
+      "kategoriId": 3,
+      "baslik": "Okunması Gereken En İyi Kitaplar",
+      "aciklama": "Edebiyat dünyasının başyapıtlarını keşfedin. Klasik eserlerden çağdaş romanlara, okunması gereken en iyi kitapları sıralıyoruz.",
+      "resim": "https://picsum.photos/804/600",
+      "favoriSayisi": 28,
+      "banner": 0,
+        "date": "2023-11-01",
+      "tag": [
+        "kitap",
+        "edebiyat",
+        "klasik"
+      ]
+    },
+    {
+      "id": 10,
+      "kategoriId": 4,
+      "baslik": "Lezzetli ve Sağlıklı Yemek Tarifleri",
+      "aciklama": "Sağlıklı yaşam için lezzetli yemek tarifleri. Kolayca hazırlanabilen ve besleyici yemek tariflerini bu yazımızda bulabilirsiniz.",
+      "resim": "https://picsum.photos/800/605",
+      "favoriSayisi": 32,
+      "banner": 1,
+        "date": "2023-12-01",
+      "tag": [
+        "yemek",
+        "tarif",
+        "sağlıklı yaşam"
+      ]
+    },
+    {
+      "id": 11,
+      "kategoriId": 1,
+      "baslik": "Yeni Teknoloji Trendleri",
+      "aciklama": "Yılın en yeni teknoloji trendlerini keşfedin. Teknoloji dünyasındaki son gelişmeleri ve gelecek vadeden teknolojileri bu yazımızda bulabilirsiniz. Yapay zeka, nesnelerin interneti ve diğer önemli konuları ele alıyoruz.",
+      "resim": "https://picsum.photos/805/600",
+      "favoriSayisi": 15,
+      "banner": 0,
+      "date": "2023-01-01",
+      "tag": [
+        "teknoloji",
+        "yapay zeka",
+        "nesnelerin interneti"
+      ]
+    },
+    {
+      "id": 12,
+      "kategoriId": 2,
+      "baslik": "Evrim Teorisi ve Bilimsel Tartışmalar",
+      "aciklama": "Evrim teorisinin bilimsel tartışmalara etkisi. Charles Darwin'in evrim teorisinin günümüzdeki yeri ve bilimsel topluluktaki tartışmaları ele alıyoruz.",
+      "resim": "https://picsum.photos/800/606",
+      "favoriSayisi": 10,
+      "banner": 0,
+        "date": "2023-06-11",
+      "tag": [
+        "evrim",
+        "bilim",
+        "darwin"
+      ]
+    },
+    {
+      "id": 13,
+      "kategoriId": 3,
+      "baslik": "Modern Sanat Akımları",
+      "aciklama": "Sanat dünyasındaki modern akımların incelenmesi. Çağdaş sanatın farklı akımları ve sanatçılarının eserleri üzerine detaylı bir bakış sunuyoruz.",
+      "resim": "https://picsum.photos/806/600",
+      "favoriSayisi": 20,
+      "banner": 0,
+        "date": "2023-07-28",
+      "tag": [
+        "sanat",
+        "çağdaş sanat",
+        "modern sanat"
+      ]
+    },
+    {
+      "id": 14,
+      "kategoriId": 4,
+      "baslik": "Sporun Yararları ve Egzersiz Tüyoları",
+      "aciklama": "Sağlıklı bir yaşam için sporun önemi ve etkili egzersiz tüyoları. Fiziksel aktivitenin beden ve zihin sağlığına olan olumlu etkilerini açıklıyor.",
+      "resim": "https://picsum.photos/800/607",
+      "favoriSayisi": 18,
+      "banner": 0,
+        "date": "2023-08-15",
+      "tag": [
+        "spor",
+        "egzersiz",
+        "sağlıklı yaşam"
+      ]
+    },
+    {
+      "id": 15,
+      "kategoriId": 5,
+      "baslik": "En Sevilen Müzik Türleri",
+      "aciklama": "Müzik dünyasının en sevilen türleri ve örnek parçalar. Farklı müzik türlerinin özellikleri ve popülerlik sebeplerini keşfedin.",
+      "resim": "https://picsum.photos/808/600",
+      "favoriSayisi": 22,
+      "banner": 1,
+        "date": "2023-09-01",
+      "tag": [
+        "müzik",
+        "müzik türleri",
+        "popüler müzik"
+      ]
+    },
+    {
+      "id": 16,
+      "kategoriId": 6,
+      "baslik": "2023 Yılında Çıkacak En İyi Filmler",
+      "aciklama": "Gelecek yıl vizyona girecek heyecan verici filmler. 2023'te beklenen ve izleyiciler tarafından merakla beklenen filmleri listeledik.",
+      "resim": "https://picsum.photos/800/609",
+      "favoriSayisi": 17,
+      "banner": 0,
+        "date": "2023-10-01",
+      "tag": [
+        "film",
+        "sinema",
+        "2023"
+      ]
+    },
+    {
+      "id": 17,
+      "kategoriId": 6,
+      "baslik": "Gezi Rehberi: Doğal Güzellikleri Keşfedin",
+      "aciklama": "Dünyanın dört bir yanındaki doğal güzellikleri ziyaret edin. En etkileyici doğa harikalarını ve keşfedilmeye değer yerleri rehberimizde bulabilirsiniz.",
+      "resim": "https://picsum.photos/809/600",
+      "favoriSayisi": 30,
+      "banner": 0,
+        "date": "2023-11-01",
+      "tag": [
+        "gezi",
+        "doğa",
+        "seyahat"
+      ]
+    },
+    {
+      "id": 18,
+      "kategoriId": 6,
+      "baslik": "Son Moda Trendleri",
+      "aciklama": "Sezonun en trend moda parçalarını keşfedin. Moda dünyasındaki son gelişmeleri, tasarımcıların önerilerini ve kombin önerilerini paylaşıyoruz.",
+      "resim": "https://picsum.photos/800/610",
+      "favoriSayisi": 25,
+      "banner": 0,
+        "date": "2023-12-01",
+      "tag": [
+        "moda",
+        "trend",
+        "giyim"
+      ]
+    },
+    {
+      "id": 19,
+      "kategoriId": 6,
+      "baslik": "Okunması Gereken En İyi Kitaplar",
+      "aciklama": "Edebiyat dünyasının başyapıtlarını keşfedin. Klasik eserlerden çağdaş romanlara, okunması gereken en iyi kitapları sıralıyoruz.",
+      "resim": "https://picsum.photos/811/600",
+      "favoriSayisi": 28,
+      "banner": 1,
+        "date": "2023-01-01",
+      "tag": [
+        "kitap",
+        "edebiyat",
+        "klasik"
+      ]
+    },
+    {
+      "id": 20,
+      "kategoriId": 6,
+      "baslik": "Lezzetli ve Sağlıklı Yemek Tarifleri",
+      "aciklama": "Sağlıklı yaşam için lezzetli yemek tarifleri. Kolayca hazırlanabilen ve besleyici yemek tariflerini bu yazımızda bulabilirsiniz.",
+      "resim": "https://picsum.photos/800/611",
+      "favoriSayisi": 32,
+      "banner": 0,
+        "date": "2023-02-01",
+      "tag": [
+        "yemek",
+        "tarif",
+        "sağlıklı yaşam"
+      ]
+    },
+    {
+      "id": 21,
+      "kategoriId": 1,
+      "baslik": "Yeni Teknoloji Trendleri",
+      "aciklama": "Yılın en yeni teknoloji trendlerini keşfedin. Teknoloji dünyasındaki son gelişmeleri ve gelecek vadeden teknolojileri bu yazımızda bulabilirsiniz. Yapay zeka, nesnelerin interneti ve diğer önemli konuları ele alıyoruz.",
+      "resim": "https://picsum.photos/812/600",
+      "favoriSayisi": 15,
+      "banner": 0,
+      "date": "2023-03-01",
+      "tag": [
+        "teknoloji",
+        "yapay zeka",
+        "nesnelerin interneti"
+      ]
+    },
+    {
+      "id": 22,
+      "kategoriId": 2,
+      "baslik": "Evrim Teorisi ve Bilimsel Tartışmalar",
+      "aciklama": "Evrim teorisinin bilimsel tartışmalara etkisi. Charles Darwin'in evrim teorisinin günümüzdeki yeri ve bilimsel topluluktaki tartışmaları ele alıyoruz.",
+      "resim": "https://picsum.photos/800/612",
+      "favoriSayisi": 10,
+      "banner": 0,
+        "date": "2023-04-01",
+      "tag": [
+        "evrim",
+        "bilim",
+        "darwin"
+      ]
+    },
+    {
+      "id": 23,
+      "kategoriId": 3,
+      "baslik": "Modern Sanat Akımları",
+      "aciklama": "Sanat dünyasındaki modern akımların incelenmesi. Çağdaş sanatın farklı akımları ve sanatçılarının eserleri üzerine detaylı bir bakış sunuyoruz.",
+      "resim": "https://picsum.photos/813/600",
+      "favoriSayisi": 20,
+      "banner": 0,
+        "date": "2023-05-01",
+      "tag": [
+        "sanat",
+        "çağdaş sanat",
+        "modern sanat"
+      ]
+    },
+    {
+      "id": 24,
+      "kategoriId": 4,
+      "baslik": " Sporun Yararları ve Egzersiz Tüyoları",
+      "aciklama": "Sağlıklı bir yaşam için sporun önemi ve etkili egzersiz tüyoları. Fiziksel aktivitenin beden ve zihin sağlığına olan olumlu etkilerini açıklıyor.",
+      "resim": "https://picsum.photos/800/613",
+      "favoriSayisi": 18,
+      "banner": 0,
+        "date": "2023-06-01",
+      "tag": [
+        "spor",
+        "egzersiz",
+        "sağlıklı yaşam"
+      ]
+    }
+  ]
+}

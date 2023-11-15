@@ -1,0 +1,11 @@
+{
+    "cars": [
+        {
+            "id": 1,
+            "carModel": "Mercedes",
+            "carBrand": "AMG",
+            "carUrl": "carImages/car1.jpg",
+            "carPrice": 18
+        }
+    ]
+}

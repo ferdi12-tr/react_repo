@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
+import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './fkoca_logo.svg';
 import store from "./redux/store";
@@ -23,7 +23,6 @@ export default class CarNavBar extends Component {
             total += Number(element.car.carPrice) * Number(element.totalHour)
         });
         this.setState({ totalPayAmount: total });
-        console.log("Total amount: " + total)
     }
     
 

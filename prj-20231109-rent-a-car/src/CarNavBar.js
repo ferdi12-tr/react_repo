@@ -1,68 +1,66 @@
-import React, {useState} from "react";
+import React, { Component } from "react";
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, NavbarText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './fkoca_logo.svg';
-
 import store from "./redux/store";
 
-let setTotalPayAmountFunc;
 
-const calculateTotal = () => {
-    let total = 0;
-    store.getState().forEach(element => {
-        total += Number(element.car.carPrice)
-    });
-    setTotalPayAmountFunc(total);
-    console.log("Total amount: " + total)
-}
+export default class CarNavBar extends Component {
 
-const unsubscribe = store.subscribe(calculateTotal);
+    constructor(props) {
+        super(props)
+        this.state = {
+            navbarOpen: false,
+            totalPayAmount: 0,
+        }
 
+        this.unsubscribe = store.subscribe(this.calculateTotal);
+    }
 
-
-
-export default function CarNavBar() {
+    calculateTotal = () => {
+        let total = 0;
+        store.getState().forEach(element => {
+            total += Number(element.car.carPrice) * Number(element.totalHour)
+        });
+        this.setState({ totalPayAmount: total });
+        console.log("Total amount: " + total)
+    }
     
-    const [navbarOpen, setNavbarOpen] = useState(false);
-    const navbarToggle = () => setNavbarOpen(!navbarOpen);
-    const [totalPayAmount, setTotalPayAmount] = useState(0);
 
-    setTotalPayAmountFunc = setTotalPayAmount;
-
-
-    
     /* FlexGrow is a temporary solution for aligning item to the right side*/
-    return (
-        <div>
-            <Navbar color="light" expand="md">
-                <NavbarBrand href="#">
-                    <img alt="logo" src={logo} style={{ height: 80, width: 80, marginRight:30}}/>
-                    FKoca - Rent A Car
-                </NavbarBrand>
-                <NavbarToggler onClick={navbarToggle} />
-                <Collapse isOpen={navbarOpen} navbar style={{flexGrow:"0"}}> 
-                    <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLink href="#">Main Page</NavLink>
-                        </NavItem>
+    render() {
+        return (
+            <div>
+                <Navbar color="light" expand="md">
+                    <NavbarBrand href="#">
+                        <img alt="logo" src={logo} style={{ height: 80, width: 80, marginRight: 30 }} />
+                        FKoca - Rent A Car
+                    </NavbarBrand>
+                    <NavbarToggler onClick={() => this.setState({ navbarOpen: !this.state.navbarOpen })} />
+                    <Collapse isOpen={this.state.navbarOpen} navbar style={{ flexGrow: "0" }}>
+                        <Nav className="ml-auto" navbar>
+                            <NavItem>
+                                <NavLink href="#">Main Page</NavLink>
+                            </NavItem>
 
-                        <NavItem> 
-                            <NavLink href="#">About Us</NavLink>
-                        </NavItem>
+                            <NavItem>
+                                <NavLink href="#">About Us</NavLink>
+                            </NavItem>
 
-                        <NavItem> 
-                            <NavLink href="#">Gallery</NavLink>
-                        </NavItem>
+                            <NavItem>
+                                <NavLink href="#">Gallery</NavLink>
+                            </NavItem>
 
-                        <NavItem> 
-                            <NavLink href="#">Sign Up</NavLink>
-                        </NavItem>
-                        <NavItem> 
-                            <NavLink href="#">Bag: {totalPayAmount}$</NavLink>
-                        </NavItem>
-                    </Nav>
-                </Collapse>
-            </Navbar>
-        </div>
-    )
+                            <NavItem>
+                                <NavLink href="#">Sign Up</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="#">Bag: {this.state.totalPayAmount}$</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </Collapse>
+                </Navbar>
+            </div>
+        )
+    }
 }

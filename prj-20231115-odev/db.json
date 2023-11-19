@@ -1,0 +1,182 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "ad": "Smart Phone"
+        },
+        {
+            "id": 2,
+            "ad": "Laptops"
+        },
+        {
+            "id": 3,
+            "ad": "sunglasses"
+        },
+        {
+            "id": 4,
+            "ad": "mens-shoes"
+        }
+    ],
+    "items": [
+        {
+            "id": 1,
+            "kategoriId": 1,
+            "baslik": "An apple mobile which is nothing like apple",
+            "aciklama": "Yılın en yeni teknoloji trendlerini keşfedin. Teknoloji dünyasındaki son gelişmeleri ve gelecek vadeden teknolojileri bu yazımızda bulabilirsiniz. Yapay zeka, nesnelerin interneti ve diğer önemli konuları ele alıyoruz.",
+            "resim": "https://i.dummyjson.com/data/products/1/1.jpg",
+            "favoriSayisi": 15,
+            "banner": 1,
+            "price": 10
+        },
+        {
+            "id": 2,
+            "kategoriId": 2,
+            "baslik": "Samsung Galaxy Book",
+            "aciklama": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+            "resim": "https://i.dummyjson.com/data/products/7/1.jpg",
+            "favoriSayisi": 10,
+            "banner": 1,
+            "price": 10
+        },
+        {
+            "id": 3,
+            "kategoriId": 3,
+            "baslik": "Round Silver Frame Sun Glasses",
+            "aciklama": "A pair of sunglasses can protect your eyes from being hurt. For car driving, vacation travel, outdoor activities, social gatherings,",
+            "resim": "https://i.dummyjson.com/data/products/81/1.jpg",
+            "favoriSayisi": 20,
+            "banner": 1,
+            "price": 10
+        },
+        {
+            "id": 4,
+            "kategoriId": 4,
+            "baslik": "Sneakers Joggers Shoes",
+            "aciklama": "Gender: Men , Colors: Same as DisplayedCondition: 100% Brand New",
+            "resim": "https://i.dummyjson.com/data/products/56/1.jpg",
+            "favoriSayisi": 18,
+            "banner": 1,
+            "price": 10
+        },
+        {
+            "id": 5,
+            "kategoriId": 1,
+            "baslik": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+            "aciklama": "Müzik dünyasının en sevilen türleri ve örnek parçalar. Farklı müzik türlerinin özellikleri ve popülerlik sebeplerini keşfedin.",
+            "resim": "https://i.dummyjson.com/data/products/2/1.jpg",
+            "favoriSayisi": 22,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 6,
+            "kategoriId": 2,
+            "baslik": "Microsoft Surface Laptop 4",
+            "aciklama": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
+            "resim": "https://i.dummyjson.com/data/products/8/1.jpg",
+            "favoriSayisi": 17,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 7,
+            "kategoriId": 3,
+            "baslik": "Kabir Singh Square Sunglass",
+            "aciklama": "Orignal Metal Kabir Singh design 2020 Sunglasses Men Brand Designer Sun Glasses Kabir Singh Square Sunglass",
+            "resim": "https://i.dummyjson.com/data/products/82/1.jpg",
+            "favoriSayisi": 30,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 8,
+            "kategoriId": 4,
+            "baslik": "Loafers for men",
+            "aciklama": "Men Shoes - Loafers for men - Rubber Shoes - Nylon Shoes - Shoes for men - Moccassion - Pure Nylon (Rubber) Expot Quality.",
+            "resim": "https://i.dummyjson.com/data/products/57/1.jpg",
+            "favoriSayisi": 25,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 9,
+            "kategoriId": 1,
+            "baslik": "OPPO F19 is officially announced on April 2021.",
+            "aciklama": "Samsung's new variant which goes beyond Galaxy to the Universe",
+            "resim": "https://i.dummyjson.com/data/products/4/1.jpg",
+            "favoriSayisi": 28,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 10,
+            "kategoriId": 2,
+            "baslik": "Infinix INBOOK",
+            "aciklama": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+            "resim": "https://i.dummyjson.com/data/products/9/1.jpg",
+            "favoriSayisi": 32,
+            "banner": 1,
+            "price": 10
+        },
+        {
+            "id": 11,
+            "kategoriId": 3,
+            "baslik": "Wiley X Night Vision Yellow Glasses",
+            "aciklama": "Wiley X Night Vision Yellow Glasses for Riders - Night Vision Anti Fog Driving Glasses - Free Night Glass Cover - Shield Eyes From Dust and Virus- For Night Sport Matches",
+            "resim": "https://i.dummyjson.com/data/products/83/1.jpg",
+            "favoriSayisi": 15,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 12,
+            "kategoriId": 4,
+            "baslik": "formal offices shoes",
+            "aciklama": "Pattern Type: Solid, Material: PU, Toe Shape: Pointed Toe ,Outsole Material: Rubber",
+            "resim": "https://i.dummyjson.com/data/products/58/1.jpg",
+            "favoriSayisi": 10,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 13,
+            "kategoriId": 1,
+            "baslik": "Huawei P30",
+            "aciklama": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+            "resim": "https://i.dummyjson.com/data/products/5/1.jpg",
+            "favoriSayisi": 20,
+            "banner": 1,
+            "price": 10
+        },
+        {
+            "id": 14,
+            "kategoriId": 2,
+            "baslik": "HP Pavilion 15-DK1056WM",
+            "aciklama": "HP Pavilion 15-DK1056WM Gaming Laptop 10th Gen Core i5, 8GB, 256GB SSD, GTX 1650 4GB, Windows 10",
+            "resim": "https://i.dummyjson.com/data/products/10/1.jpg",
+            "favoriSayisi": 18,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 15,
+            "kategoriId": 3,
+            "baslik": "Square Sunglasses",
+            "aciklama": "Fashion Oversized Square Sunglasses Retro Gradient Big Frame Sunglasses For Women One Piece Gafas Shade Mirror Clear Lens 17059",
+            "resim": "https://i.dummyjson.com/data/products/84/1.jpg",
+            "favoriSayisi": 22,
+            "banner": 0,
+            "price": 10
+        },
+        {
+            "id": 16,
+            "kategoriId": 4,
+            "baslik": "Spring and summershoes",
+            "aciklama": "Comfortable stretch cloth, lightweight body; ,rubber sole, anti-skid wear;",
+            "resim": "https://i.dummyjson.com/data/products/59/1.jpg",
+            "favoriSayisi": 17,
+            "banner": 0,
+            "price": 10
+        }
+    ]
+}

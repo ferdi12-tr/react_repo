@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 
+import { loginUserStore} from './redux/store';
+import { loginUser } from './redux/actions';
+
+
 
 export default class Login extends Component {
 
@@ -29,6 +33,7 @@ export default class Login extends Component {
                 const user = data.find((user) => user.username === this.state.username && user.password === this.state.password)
                 if (user) {
                     this.props.setCurrentUser(user);
+                    loginUserStore.dispatch(loginUser(user));
                 }
                 else {
                     this.setState({ message: "invalid username or password" })
@@ -46,7 +51,8 @@ export default class Login extends Component {
             name: this.state.name,
             surname: this.state.surname,
             username: this.state.username,
-            password: this.state.password
+            password: this.state.password,
+            addedCarsId: [] // keep added cars id in order to get request from json
         }
         fetch("http://localhost:3000/users", {
             method: 'POST', // not PUT method

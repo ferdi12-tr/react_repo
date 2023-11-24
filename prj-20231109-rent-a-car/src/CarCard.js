@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Card, CardImg, CardImgOverlay, CardTitle, CardText, } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import store from './redux/store';
+import {store} from './redux/store';
 import { carAdded } from './redux/actions';
 
 

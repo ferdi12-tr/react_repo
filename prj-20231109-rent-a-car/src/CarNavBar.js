@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './fkoca_logo.svg';
-import store from "./redux/store";
+import {store, loginUserStore} from "./redux/store";
 
 
 export default class CarNavBar extends Component {
@@ -15,9 +15,15 @@ export default class CarNavBar extends Component {
         }
 
         this.unsubscribe = store.subscribe(this.calculateTotal);
+        this.unsubscribeLogin = loginUserStore.subscribe(this.whenLogin);
+    }
+
+    whenLogin = () => {
+        console.log("whenLogin");
     }
 
     calculateTotal = () => {
+        console.log("calculateTotal");
         let total = 0;
         store.getState().forEach(element => {
             total += Number(element.car.carPrice) * Number(element.totalHour)

@@ -14,14 +14,8 @@
       "surname": "Koca",
       "username": "fkoca",
       "password": "1234",
+      "addedCarsId": [],
       "id": 1
-    },
-    {
-      "name": "Ali",
-      "surname": "Veli",
-      "username": "ally",
-      "password": "12345",
-      "id": 2
     }
   ]
 }

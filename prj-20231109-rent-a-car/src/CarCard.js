@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Card, CardImg, CardImgOverlay, CardTitle, CardText, } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {store} from './redux/store';
+import {store, loginUserStore} from './redux/store';
 import { carAdded } from './redux/actions';
 
 
@@ -36,6 +36,28 @@ export default class CarCard extends Component {
 
         let totalhour = (datetimeto - datetimefrom) / (1000 * 3600)
         store.dispatch(carAdded(this.state.currentCar, totalhour))
+    }
+
+    updateAddedCarsId = () => {
+        
+        if(!(this.state.selectedTime && this.state.fromDate && this.state.toDate))
+        return;
+
+        const currentUser = loginUserStore.getState()[0].currentUser;
+        
+        const updatedUser = {
+            ...currentUser,
+            addedCarsId: currentUser.addedCarsId.concat([this.state.currentCar.id]) 
+        }
+        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedUser),
+        })
+        .then(response => response.json())
+        .then(response => console.log(response))
     }
 
     render() {
@@ -81,7 +103,7 @@ export default class CarCard extends Component {
                             </ModalBody>
 
                             <ModalFooter>
-                                <Button color="success" onClick={() => { this.calculateTotalHour(); this.toggleModal() }}>
+                                <Button color="success" onClick={() => { this.calculateTotalHour(); this.toggleModal(); this.updateAddedCarsId()}}>
                                     Book
                                 </Button>
                                 <Button color="danger" onClick={this.toggleModal}>

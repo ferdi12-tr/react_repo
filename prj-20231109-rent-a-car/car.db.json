@@ -1,11 +1,27 @@
 {
-    "cars": [
-        {
-            "id": 1,
-            "carModel": "Mercedes",
-            "carBrand": "AMG",
-            "carUrl": "carImages/car1.jpg",
-            "carPrice": 18
-        }
-    ]
+  "cars": [
+    {
+      "id": 1,
+      "carModel": "Mercedes",
+      "carBrand": "AMG",
+      "carUrl": "carImages/car1.jpg",
+      "carPrice": 18
+    }
+  ],
+  "users": [
+    {
+      "name": "Ferdi",
+      "surname": "Koca",
+      "username": "fkoca",
+      "password": "1234",
+      "id": 1
+    },
+    {
+      "name": "Ali",
+      "surname": "Veli",
+      "username": "ally",
+      "password": "12345",
+      "id": 2
+    }
+  ]
 }

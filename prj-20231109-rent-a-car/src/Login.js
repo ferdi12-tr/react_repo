@@ -37,23 +37,27 @@ export default class Login extends Component {
     }
 
     SignUpButton = () => {
+        if (!(this.state.name && this.state.surname && this.state.username && this.state.password)){
+            this.clearInputs();
+            return;
+        }
+            
         const newUser = {
             name: this.state.name,
             surname: this.state.surname,
             username: this.state.username,
             password: this.state.password
         }
-        
-        fetch("http://localhost:3000/users/2", {
-            method: 'PUT',
+        fetch("http://localhost:3000/users", {
+            method: 'POST', // not PUT method
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(newUser),
         })
         .then(response => response.json())
-        .then(response => console.log(response))
-        //.finally(this.clearInputs)
+        .then(response => this.setState({haveAccount:true}))
+        .finally(this.clearInputs)
     }
 
 
@@ -62,7 +66,7 @@ export default class Login extends Component {
             !this.state.haveAccount ?
                 <div>
                     <h2>Sign Up</h2>
-                    <input type="text" className="form-control mt-3" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} placeholder="Name" />
+                    <input required type="text" className="form-control mt-3" value={this.state.name} onChange={(e) => this.setState({ name: e.target.value })} placeholder="Name" />
                     <input type="text" className="form-control mt-3" value={this.state.surname} onChange={(e) => this.setState({ surname: e.target.value })} placeholder="Surname" />
                     <input type="text" className="form-control mt-3" value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} placeholder="username" />
                     <input type="password" className="form-control mt-3" value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} placeholder="password" />

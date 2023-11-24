@@ -8,7 +8,6 @@ export default class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id: 0,
             carBrand: "",
             carModel: "",
             carPrice: "",
@@ -18,26 +17,43 @@ export default class MainPage extends Component {
         }
     }
 
-    componentDidMount() {
-        let db_url = "http://localhost:3000/cars"
+    clearInputs = () => {
+        this.setState({ carBrand: "" });
+        this.setState({ carModel: "" });
+        this.setState({ carPrice: "" });
+        this.setState({ carUrl: "" });
+    }
 
-        fetch(db_url)
+    componentDidMount() {
+        this.getCarsFromJson();
+    }
+
+    getCarsFromJson = () => {
+        fetch("http://localhost:3000/cars")
             .then(db => db.json())
             .then(data => {
                 this.setState({ carList: data })
             })
     }
 
+    addCarToJson = (addedCarData) => {
+        fetch("http://localhost:3000/cars", {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(addedCarData),
+        })
+        .finally(() => {
+            this.clearInputs();
+            this.getCarsFromJson();
+        })
+    }
+
     addCar = () => {
         if (this.state.carBrand && this.state.carModel && Number(this.state.carPrice) > 0) {
-            this.setState({ id: this.state.id + 1 })
-            // setCarList([...this.state.carList, { id, carBrand, carModel, carPrice, carUrl }])
-            this.state.carList.push({ id: this.state.id, carBrand: this.state.carBrand, carModel: this.state.carModel, carPrice: this.state.carPrice, carUrl: this.state.carUrl })
+            this.addCarToJson({carBrand: this.state.carBrand, carModel: this.state.carModel, carPrice: this.state.carPrice, carUrl: this.state.carUrl })
         }
-        this.setState({ carBrand: "" });
-        this.setState({ carModel: "" });
-        this.setState({ carPrice: "" });
-        this.setState({ carUrl: "" });
     }
 
     GetCarUrl = (file) => {

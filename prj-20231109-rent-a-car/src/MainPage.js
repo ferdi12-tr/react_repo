@@ -66,10 +66,14 @@ export default class MainPage extends Component {
         this.setState({currentUser:user})
     }
 
+    getCarList = () => {
+        return this.state.carList;
+    }
+
     render() {
         return (
             <>
-                <CarNavBar />
+                <CarNavBar getCarList={this.getCarList}/>
                 <div className="container">
                     <div className="row mt-3">
                         <div className="col-3">

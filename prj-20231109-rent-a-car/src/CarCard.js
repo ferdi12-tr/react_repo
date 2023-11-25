@@ -40,14 +40,14 @@ export default class CarCard extends Component {
 
     updateAddedCarsId = () => {
         
-        if(!(this.state.selectedTime && this.state.fromDate && this.state.toDate))
-        return;
+        // if(!(this.state.selectedTime && this.state.fromDate && this.state.toDate))
+        // return;
 
         const currentUser = loginUserStore.getState()[0].currentUser;
         
         const updatedUser = {
             ...currentUser,
-            addedCarsId: currentUser.addedCarsId.concat([this.state.currentCar.id]) 
+            addedCarsId: currentUser.addedCarsId.concat([this.state.currentCar.id])
         }
         fetch(`http://localhost:3000/users/${currentUser.id}`, {
             method: 'PUT',

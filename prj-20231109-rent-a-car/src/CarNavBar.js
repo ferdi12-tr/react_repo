@@ -12,14 +12,19 @@ export default class CarNavBar extends Component {
         this.state = {
             navbarOpen: false,
             totalPayAmount: 0,
+            bookedCarList: []
         }
 
         this.unsubscribe = store.subscribe(this.calculateTotal);
         this.unsubscribeLogin = loginUserStore.subscribe(this.whenLogin);
     }
 
-    whenLogin = () => {
-        console.log("whenLogin");
+    // when user logged in, show users booked cars info up on dropdown
+    whenLogin = () => { 
+        let addedCarsIdList = loginUserStore.getState()[0].currentUser.addedCarsId;
+        let bookedCars = this.props.getCarList().filter(car =>  addedCarsIdList.includes(car.id));
+        this.setState({bookedCarList:bookedCars})
+        
     }
 
     calculateTotal = () => {

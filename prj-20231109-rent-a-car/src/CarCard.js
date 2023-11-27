@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Card, CardImg, CardImgOverlay, CardTitle, CardText, } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import {store, loginUserStore} from './redux/store';
-import { carAdded } from './redux/actions';
+import { store, loginUserStore } from './redux/store';
+import { carAdded, loginUser } from './redux/actions';
 
 
 export default class CarCard extends Component {
@@ -36,28 +36,37 @@ export default class CarCard extends Component {
 
         let totalhour = (datetimeto - datetimefrom) / (1000 * 3600)
         store.dispatch(carAdded(this.state.currentCar, totalhour))
+
+        let bookedCarObj = Object();
+        bookedCarObj.carId = store.getState().car.id;
+        bookedCarObj.totalhour = totalhour;
+        bookedCarObj.fromDate = this.state.fromDate;
+        bookedCarObj.toDate = this.state.toDate;
+
+        this.updateAddedCarsId(bookedCarObj);
     }
 
-    updateAddedCarsId = () => {
-        
+    updateAddedCarsId = async (bookedCarObj) => {
+
         // if(!(this.state.selectedTime && this.state.fromDate && this.state.toDate))
         // return;
+        const currentUser = loginUserStore.getState();
 
-        const currentUser = loginUserStore.getState()[0].currentUser;
-        
         const updatedUser = {
             ...currentUser,
-            addedCarsId: currentUser.addedCarsId.concat([this.state.currentCar.id])
+            addedCarsId: currentUser.addedCarsId.concat([bookedCarObj])
         }
-        fetch(`http://localhost:3000/users/${currentUser.id}`, {
+
+        loginUserStore.dispatch(loginUser(updatedUser)) // update current user info with updated car info
+
+        fetch(`http://localhost:3000/users/${currentUser.id}`, { // also, send the info to json db
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(updatedUser),
         })
-        .then(response => response.json())
-        .then(response => console.log(response))
+            .then(response => response.json())
     }
 
     render() {
@@ -103,7 +112,7 @@ export default class CarCard extends Component {
                             </ModalBody>
 
                             <ModalFooter>
-                                <Button color="success" onClick={() => { this.calculateTotalHour(); this.toggleModal(); this.updateAddedCarsId()}}>
+                                <Button color="success" onClick={() => { this.calculateTotalHour(); this.toggleModal(); }}>
                                     Book
                                 </Button>
                                 <Button color="danger" onClick={this.toggleModal}>

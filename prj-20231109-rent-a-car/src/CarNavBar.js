@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, List } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -18,29 +18,40 @@ export default class CarNavBar extends Component {
         }
 
         this.unsubscribe = store.subscribe(this.calculateTotal);
-        this.unsubscribeLogin = loginUserStore.subscribe(this.whenLogin);
+        this.unsubscribeLogin = loginUserStore.subscribe(this.whenUpdatedOrLogin);
     }
 
-    // when user logged in, show users booked cars info up on dropdown
-    whenLogin = () => {
-        let addedCarsIdList = loginUserStore.getState()[0].currentUser.addedCarsId;
-        let bookedCars = this.props.getCarList().filter(car => addedCarsIdList.includes(car.id));
-        this.setState({ bookedCarList: bookedCars })
 
+    // when user logged in or current user updated, get the current user info from state 
+    whenUpdatedOrLogin = () => {
+        this.setState({ bookedCarList: [] });
+
+        const currentUser = loginUserStore.getState();
+
+        // TODO probably some race condition occur, fix it 
+        // tip: get addedCarsId from user id request
+        currentUser.addedCarsId.forEach((addedCar) => {
+            fetch(`http://localhost:3000/cars/${addedCar.carId}`)
+                .then(data => data.json())
+                .then(data => {
+                    this.setState({ bookedCarList: [...this.state.bookedCarList, data] })
+                }).catch((error) => {
+                    console.log(error)
+                })
+        })
     }
 
     calculateTotal = () => {
-        console.log("calculateTotal");
         let total = 0;
-        store.getState().forEach(element => {
-            total += Number(element.car.carPrice) * Number(element.totalHour)
-        });
+        const state = store.getState()
+        total += Number(state.car.carPrice) * Number(state.totalHour)
         this.setState({ totalPayAmount: total });
     }
 
 
     /* FlexGrow is a temporary solution for aligning item to the right side*/
     render() {
+        {console.log(this.state.bookedCarList)}
         return (
             <div>
                 <Navbar color="light" expand="md">
@@ -66,7 +77,7 @@ export default class CarNavBar extends Component {
                             <NavItem>
                                 <NavLink href="#">Sign Up</NavLink>
                             </NavItem>
-                            
+
                             <UncontrolledDropdown nav inNavbar>
                                 <DropdownToggle nav caret>
                                     {this.state.totalPayAmount}$

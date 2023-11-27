@@ -1,14 +1,14 @@
 import * as actions from './actionTypes'
 
-export default function loginUserReducer(state = [], action) {
+export default function loginUserReducer(state = {}, action) {
     switch (action.type) {
         case actions.LOGIN_USER:
-            return [
+            let tempState = {
                 ...state,
-                {
-                    currentUser:action.payload.currentUser,
-                }
-            ]
+                ...action.payload.currentUser
+            }
+            console.log(tempState)
+            return tempState
         default:
             return state;
     }

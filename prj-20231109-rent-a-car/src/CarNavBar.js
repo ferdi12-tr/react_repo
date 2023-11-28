@@ -74,6 +74,26 @@ export default class CarNavBar extends Component {
             .then(response => response.json())
     }
 
+    removeAllBtnNavBar = () => {
+        const currentUser = loginUserStore.getState();
+        
+        const updatedUser = {
+            ...currentUser,
+            addedCars: []
+        }
+
+        loginUserStore.dispatch(loginUser(updatedUser))
+        
+        fetch(`http://localhost:3000/users/${currentUser.id}`, { // also, send the info to json db
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedUser),
+        })
+            .then(response => response.json())
+    }
+
 
     /* FlexGrow is a temporary solution for aligning item to the right side*/
     render() {
@@ -112,7 +132,7 @@ export default class CarNavBar extends Component {
                                         <DropdownItem key={index}>{element.carModel} {element.carBrand}<FontAwesomeIcon onClick={() => this.deleteIconNavBar(element)} color='red' className='ms-3' icon={faTrash} /></DropdownItem>
                                     )}
                                     <DropdownItem divider />
-                                    <DropdownItem tag="a"><Button size='sm' color='danger' disabled={!(this.state.carList.length > 0)}>Reset</Button></DropdownItem>
+                                    <DropdownItem tag="a"><Button onClick={this.removeAllBtnNavBar} size='sm' color='danger' disabled={!(this.state.carList.length > 0)}>Remove All</Button></DropdownItem>
                                     <DropdownItem tag="a"><Button size='sm' disabled={!(this.state.carList.length > 0)} color='success'>Buy All</Button></DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>

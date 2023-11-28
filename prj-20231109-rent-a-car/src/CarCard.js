@@ -54,7 +54,7 @@ export default class CarCard extends Component {
 
         const updatedUser = {
             ...currentUser,
-            addedCarsId: currentUser.addedCarsId.concat([bookedCarObj])
+            addedCars: currentUser.addedCars.concat([bookedCarObj])
         }
 
         loginUserStore.dispatch(loginUser(updatedUser)) // update current user info with updated car info

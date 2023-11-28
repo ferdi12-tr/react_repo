@@ -32,7 +32,7 @@ export default class CarNavBar extends Component {
     whenUpdatedOrLogin = () => {
         this.setState({ carList: [] });
         const currentUser = loginUserStore.getState();
-        const carList = currentUser.addedCarsId.map((addedCar) => fetch(`http://localhost:3000/cars/${addedCar.carId}`).then(data => data.json()))
+        const carList = currentUser.addedCars.map((addedCar) => fetch(`http://localhost:3000/cars/${addedCar.carId}`).then(data => data.json()))
         Promise.all(carList).then(data => {this.setState({carList: data})})
     }
 
@@ -42,7 +42,7 @@ export default class CarNavBar extends Component {
 
         let total = 0;
         const currentUser = loginUserStore.getState();
-        currentUser.addedCarsId.forEach(addedCar => {
+        currentUser.addedCars.forEach(addedCar => {
             let foundCar = this.state.carList.find(car => addedCar.carId === car.id)
             total += Number(addedCar.totalhour) * Number(foundCar.carPrice)
         })

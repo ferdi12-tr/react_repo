@@ -9,8 +9,8 @@ export default function reducer(state = {}, action) {
                         totalHour:action.payload.totalHour,
                 }
             
-        case actions.CAR_REMOVED:
-            return state.filter(item => item.car.id !== action.payload.id)
+        // case actions.CAR_REMOVED:
+        //     return state.filter(item => item.car.id !== action.payload.id)
         default:
             return state;
     }

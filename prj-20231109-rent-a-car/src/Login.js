@@ -52,7 +52,7 @@ export default class Login extends Component {
             surname: this.state.surname,
             username: this.state.username,
             password: this.state.password,
-            addedCarsId: [] // keep added cars id in order to get request from json
+            addedCars: [] // keep added cars id in order to get request from json
         }
         fetch("http://localhost:3000/users", {
             method: 'POST', // not PUT method

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, List } from 'reactstrap';
+import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
@@ -14,40 +14,38 @@ export default class CarNavBar extends Component {
         this.state = {
             navbarOpen: false,
             totalPayAmount: 0,
-            bookedCarList: []
+            carList: []
         }
 
-        this.unsubscribe = store.subscribe(this.calculateTotal);
+        //this.unsubscribe = store.subscribe(this.calculateTotal);
         this.unsubscribeLogin = loginUserStore.subscribe(this.whenUpdatedOrLogin);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (prevState.carList !== this.state.carList) {
+            this.calculateTotal()
+        }
     }
 
 
     // when user logged in or current user updated, get the current user info from state 
     whenUpdatedOrLogin = () => {
-        this.setState({ bookedCarList: [] });
-
+        this.setState({ carList: [] });
         const currentUser = loginUserStore.getState();
-
-        // TODO probably some race condition occur, fix it 
-        // tip: get addedCarsId from user id request
-        // currentUser.addedCarsId.forEach((addedCar) => {
-        //     fetch(`http://localhost:3000/cars/${addedCar.carId}`)
-        //         .then(data => data.json())
-        //         .then(data => {
-        //             this.setState({ bookedCarList: [...this.state.bookedCarList, data] })
-        //         }).catch((error) => {
-        //             console.log(error)
-        //         })
-        // })
-
         const carList = currentUser.addedCarsId.map((addedCar) => fetch(`http://localhost:3000/cars/${addedCar.carId}`).then(data => data.json()))
-        Promise.all(carList).then(data => this.setState({bookedCarList: data}))
+        Promise.all(carList).then(data => {this.setState({carList: data})})
     }
 
     calculateTotal = () => {
+        if (this.state.carList.length === 0)
+            return;
+
         let total = 0;
-        const state = store.getState()
-        total += Number(state.car.carPrice) * Number(state.totalHour)
+        const currentUser = loginUserStore.getState();
+        currentUser.addedCarsId.forEach(addedCar => {
+            let foundCar = this.state.carList.find(car => addedCar.carId === car.id)
+            total += Number(addedCar.totalhour) * Number(foundCar.carPrice)
+        })
         this.setState({ totalPayAmount: total });
     }
 
@@ -85,12 +83,12 @@ export default class CarNavBar extends Component {
                                     {this.state.totalPayAmount}$
                                 </DropdownToggle>
                                 <DropdownMenu end>
-                                    {this.state.bookedCarList.map((element, index) =>
+                                    {this.state.carList.map((element, index) =>
                                         <DropdownItem key={index}>{element.carModel} {element.carBrand}<FontAwesomeIcon onClick={() => console.log(element)} color='red' className='ms-3' icon={faTrash} /></DropdownItem>
                                     )}
                                     <DropdownItem divider />
-                                    <DropdownItem tag="a"><Button size='sm' color='danger' disabled={!(this.state.bookedCarList.length > 0)}>Reset</Button></DropdownItem>
-                                    <DropdownItem tag="a"><Button size='sm' disabled={!(this.state.bookedCarList.length > 0)} color='success'>Buy All</Button></DropdownItem>
+                                    <DropdownItem tag="a"><Button size='sm' color='danger' disabled={!(this.state.carList.length > 0)}>Reset</Button></DropdownItem>
+                                    <DropdownItem tag="a"><Button size='sm' disabled={!(this.state.carList.length > 0)} color='success'>Buy All</Button></DropdownItem>
                                 </DropdownMenu>
                             </UncontrolledDropdown>
                         </Nav>

@@ -6,6 +6,13 @@
       "carBrand": "AMG",
       "carUrl": "carImages/car1.jpg",
       "carPrice": 18
+    },
+    {
+      "carBrand": "X5",
+      "carModel": "BMW",
+      "carPrice": 15,
+      "carUrl": "carImages/car2.jpg",
+      "id": 2
     }
   ],
   "users": [
@@ -14,7 +21,8 @@
       "surname": "Koca",
       "username": "fkoca",
       "password": "1234",
-      "addedCarsId": [],
+      "addedCarsId": [
+      ],
       "id": 1
     }
   ]

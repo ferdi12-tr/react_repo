@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import logo from './fkoca_logo.svg';
 import { store, loginUserStore } from "./redux/store";
+import { loginUser } from './redux/actions';
 
 
 export default class CarNavBar extends Component {
@@ -38,7 +39,10 @@ export default class CarNavBar extends Component {
 
     calculateTotal = () => {
         if (this.state.carList.length === 0)
+        {
+            this.setState({ totalPayAmount: 0 });
             return;
+        }
 
         let total = 0;
         const currentUser = loginUserStore.getState();
@@ -47,6 +51,27 @@ export default class CarNavBar extends Component {
             total += Number(addedCar.totalhour) * Number(foundCar.carPrice)
         })
         this.setState({ totalPayAmount: total });
+    }
+
+    deleteIconNavBar = (deletedCar) => {
+        const currentUser = loginUserStore.getState();
+        const afterDeleteList = currentUser.addedCars.filter(car => car.carId !== deletedCar.id);
+
+        const updatedUser = {
+            ...currentUser,
+            addedCars: afterDeleteList
+        }
+
+        loginUserStore.dispatch(loginUser(updatedUser))
+        
+        fetch(`http://localhost:3000/users/${currentUser.id}`, { // also, send the info to json db
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedUser),
+        })
+            .then(response => response.json())
     }
 
 
@@ -84,7 +109,7 @@ export default class CarNavBar extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu end>
                                     {this.state.carList.map((element, index) =>
-                                        <DropdownItem key={index}>{element.carModel} {element.carBrand}<FontAwesomeIcon onClick={() => console.log(element)} color='red' className='ms-3' icon={faTrash} /></DropdownItem>
+                                        <DropdownItem key={index}>{element.carModel} {element.carBrand}<FontAwesomeIcon onClick={() => this.deleteIconNavBar(element)} color='red' className='ms-3' icon={faTrash} /></DropdownItem>
                                     )}
                                     <DropdownItem divider />
                                     <DropdownItem tag="a"><Button size='sm' color='danger' disabled={!(this.state.carList.length > 0)}>Reset</Button></DropdownItem>

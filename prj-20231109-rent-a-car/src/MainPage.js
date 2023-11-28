@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import CarCard from "./CarCard";
 import CarNavBar from "./CarNavBar";
 import Login from "./Login";
+import UpdateCar from "./UpdateCar";
 
 export default class MainPage extends Component {
 
@@ -14,6 +15,7 @@ export default class MainPage extends Component {
             carUrl: "",
             carList: [],
             currentUser: null,
+            updateCar: null
         }
     }
 
@@ -38,21 +40,21 @@ export default class MainPage extends Component {
 
     addCarToJson = (addedCarData) => {
         fetch("http://localhost:3000/cars", {
-            method: 'POST', 
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(addedCarData),
         })
-        .finally(() => {
-            this.clearInputs();
-            this.getCarsFromJson();
-        })
+            .finally(() => {
+                this.clearInputs();
+                this.getCarsFromJson();
+            })
     }
 
     addCar = () => {
         if (this.state.carBrand && this.state.carModel && Number(this.state.carPrice) > 0) {
-            this.addCarToJson({carBrand: this.state.carBrand, carModel: this.state.carModel, carPrice: this.state.carPrice, carUrl: this.state.carUrl })
+            this.addCarToJson({ carBrand: this.state.carBrand, carModel: this.state.carModel, carPrice: this.state.carPrice, carUrl: this.state.carUrl })
         }
     }
 
@@ -63,42 +65,55 @@ export default class MainPage extends Component {
 
     setCurrentUser = (user) => {
         console.log(user)
-        this.setState({currentUser:user})
+        this.setState({ currentUser: user })
+    }
+
+    setUpdateCar = (car) => {
+        this.setState({ updateCar: car })
     }
 
 
     render() {
         return (
             <>
-                <CarNavBar />
+                <CarNavBar setUpdateCar={this.setUpdateCar} />
                 <div className="container">
                     <div className="row mt-3">
                         <div className="col-3">
                             {this.state.currentUser ?
-                            <div>
-                                <input type="text" className="form-control mt-3" value={this.state.carBrand} onChange={(e) => this.setState({ carBrand: e.target.value })} placeholder="Brand" />
-                                <input type="text" className="form-control mt-3" value={this.state.carModel} onChange={(e) => this.setState({ carModel: e.target.value })} placeholder="Model" />
-                                <input type="number" className="form-control mt-3" value={this.state.carPrice} onChange={(e) => this.setState({ carPrice: e.target.value })} placeholder="Price (Per Hour)" />
+                                <div>
+                                    <input type="text" className="form-control mt-3" value={this.state.carBrand} onChange={(e) => this.setState({ carBrand: e.target.value })} placeholder="Brand" />
+                                    <input type="text" className="form-control mt-3" value={this.state.carModel} onChange={(e) => this.setState({ carModel: e.target.value })} placeholder="Model" />
+                                    <input type="number" className="form-control mt-3" value={this.state.carPrice} onChange={(e) => this.setState({ carPrice: e.target.value })} placeholder="Price (Per Hour)" />
 
-                                <label htmlFor="imgUploader" className="btn btn-danger btn-sm mt-3">Upload Image</label>
-                                <input style={{ display: "none" }} id="imgUploader" type="file" name="Image" onChange={(event) => { this.GetCarUrl(event.target.files[0]); }} /> <br />
+                                    <label htmlFor="imgUploader" className="btn btn-danger btn-sm mt-3">Upload Image</label>
+                                    <input style={{ display: "none" }} id="imgUploader" type="file" name="Image" onChange={(event) => { this.GetCarUrl(event.target.files[0]); }} /> <br />
 
-                                <button className="btn btn-success mt-3" onClick={this.addCar}>Add Car</button>
-                            </div>
-                            :
-                            <Login setCurrentUser={this.setCurrentUser} />}
+                                    <button className="btn btn-success mt-3" onClick={this.addCar}>Add Car</button>
+                                </div>
+                                :
+                                <Login setCurrentUser={this.setCurrentUser} />}
                         </div>
-                        {this.state.currentUser &&
-                        <div className="col-9">
-                            <div className="container">
-                                <div className="row">
-                                    {this.state.carList.map((element, index) => <div key={index} className="col-6">
-                                        <CarCard car={element} />
+                        {
+                            this.state.currentUser
+                            &&
+                            <div className="col-9">
+                                <div className="container">
+                                    <div className="row">
+                                        {
+                                            this.state.updateCar
+                                                ?
+                                                <UpdateCar setUpdateCar={this.setUpdateCar} />
+                                                :
+                                                this.state.carList.map((element, index) => <div key={index} className="col-6">
+                                                    <CarCard car={element} />
+                                                </div>
+                                                )
+                                        }
                                     </div>
-                                    )}
                                 </div>
                             </div>
-                        </div>}
+                        }
                     </div>
                 </div>
             </>

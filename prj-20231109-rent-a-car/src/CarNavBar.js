@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import logo from './fkoca_logo.svg';
 import { store, loginUserStore } from "./redux/store";
 import { loginUser } from './redux/actions';
@@ -17,6 +17,8 @@ export default class CarNavBar extends Component {
             totalPayAmount: 0,
             carList: []
         }
+
+        this.setUpdateCar = this.props.setUpdateCar;
 
         //this.unsubscribe = store.subscribe(this.calculateTotal);
         this.unsubscribeLogin = loginUserStore.subscribe(this.whenUpdatedOrLogin);
@@ -34,12 +36,11 @@ export default class CarNavBar extends Component {
         this.setState({ carList: [] });
         const currentUser = loginUserStore.getState();
         const carList = currentUser.addedCars.map((addedCar) => fetch(`http://localhost:3000/cars/${addedCar.carId}`).then(data => data.json()))
-        Promise.all(carList).then(data => {this.setState({carList: data})})
+        Promise.all(carList).then(data => { this.setState({ carList: data }) })
     }
 
     calculateTotal = () => {
-        if (this.state.carList.length === 0)
-        {
+        if (this.state.carList.length === 0) {
             this.setState({ totalPayAmount: 0 });
             return;
         }
@@ -63,7 +64,7 @@ export default class CarNavBar extends Component {
         }
 
         loginUserStore.dispatch(loginUser(updatedUser))
-        
+
         fetch(`http://localhost:3000/users/${currentUser.id}`, { // also, send the info to json db
             method: 'PUT',
             headers: {
@@ -76,14 +77,14 @@ export default class CarNavBar extends Component {
 
     removeAllBtnNavBar = () => {
         const currentUser = loginUserStore.getState();
-        
+
         const updatedUser = {
             ...currentUser,
             addedCars: []
         }
 
         loginUserStore.dispatch(loginUser(updatedUser))
-        
+
         fetch(`http://localhost:3000/users/${currentUser.id}`, { // also, send the info to json db
             method: 'PUT',
             headers: {
@@ -92,6 +93,10 @@ export default class CarNavBar extends Component {
             body: JSON.stringify(updatedUser),
         })
             .then(response => response.json())
+    }
+
+    updateIconNavBar = (updatedCar) => {
+        this.setUpdateCar(updatedCar)
     }
 
 
@@ -129,7 +134,10 @@ export default class CarNavBar extends Component {
                                 </DropdownToggle>
                                 <DropdownMenu end>
                                     {this.state.carList.map((element, index) =>
-                                        <DropdownItem key={index}>{element.carModel} {element.carBrand}<FontAwesomeIcon onClick={() => this.deleteIconNavBar(element)} color='red' className='ms-3' icon={faTrash} /></DropdownItem>
+                                        <DropdownItem key={index}>{element.carModel} {element.carBrand}
+                                            <FontAwesomeIcon onClick={() => this.deleteIconNavBar(element)} color='red' className='ms-3 fa-xl' icon={faTrash} />
+                                            <FontAwesomeIcon onClick={() => this.updateIconNavBar(element)} color='yellow' className='ms-3 fa-xl' icon={faPenToSquare} />
+                                        </DropdownItem>
                                     )}
                                     <DropdownItem divider />
                                     <DropdownItem tag="a"><Button onClick={this.removeAllBtnNavBar} size='sm' color='danger' disabled={!(this.state.carList.length > 0)}>Remove All</Button></DropdownItem>

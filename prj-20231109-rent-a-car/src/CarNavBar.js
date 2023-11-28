@@ -30,15 +30,18 @@ export default class CarNavBar extends Component {
 
         // TODO probably some race condition occur, fix it 
         // tip: get addedCarsId from user id request
-        currentUser.addedCarsId.forEach((addedCar) => {
-            fetch(`http://localhost:3000/cars/${addedCar.carId}`)
-                .then(data => data.json())
-                .then(data => {
-                    this.setState({ bookedCarList: [...this.state.bookedCarList, data] })
-                }).catch((error) => {
-                    console.log(error)
-                })
-        })
+        // currentUser.addedCarsId.forEach((addedCar) => {
+        //     fetch(`http://localhost:3000/cars/${addedCar.carId}`)
+        //         .then(data => data.json())
+        //         .then(data => {
+        //             this.setState({ bookedCarList: [...this.state.bookedCarList, data] })
+        //         }).catch((error) => {
+        //             console.log(error)
+        //         })
+        // })
+
+        const carList = currentUser.addedCarsId.map((addedCar) => fetch(`http://localhost:3000/cars/${addedCar.carId}`).then(data => data.json()))
+        Promise.all(carList).then(data => this.setState({bookedCarList: data}))
     }
 
     calculateTotal = () => {
@@ -51,7 +54,6 @@ export default class CarNavBar extends Component {
 
     /* FlexGrow is a temporary solution for aligning item to the right side*/
     render() {
-        {console.log(this.state.bookedCarList)}
         return (
             <div>
                 <Navbar color="light" expand="md">

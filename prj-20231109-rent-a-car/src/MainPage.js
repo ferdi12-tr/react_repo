@@ -64,7 +64,6 @@ export default class MainPage extends Component {
     }
 
     setCurrentUser = (user) => {
-        console.log(user)
         this.setState({ currentUser: user })
     }
 
@@ -103,7 +102,7 @@ export default class MainPage extends Component {
                                         {
                                             this.state.updateCar
                                                 ?
-                                                <UpdateCar setUpdateCar={this.setUpdateCar} />
+                                                <UpdateCar setUpdateCar={this.setUpdateCar} getUpdateCar={() => this.state.updateCar} />
                                                 :
                                                 this.state.carList.map((element, index) => <div key={index} className="col-6">
                                                     <CarCard car={element} />

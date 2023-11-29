@@ -28,6 +28,7 @@ export default class UpdateCar extends Component {
         this.setState({ updateCarInfo: carInfoToUpdate })
         this.setState({ fromDate: carInfoToUpdate.fromDate })
         this.setState({ toDate: carInfoToUpdate.toDate })
+        this.setState({ selectedTime: carInfoToUpdate.selectedTime })
     }
 
     render() {

@@ -21,7 +21,22 @@
       "surname": "Koca",
       "username": "fkoca",
       "password": "1234",
-      "addedCars": [],
+      "addedCars": [
+        {
+          "carId": 1,
+          "totalhour": 24,
+          "fromDate": "2023-11-29",
+          "toDate": "2023-11-30",
+          "selectedTime": "02:49"
+        },
+        {
+          "carId": 2,
+          "totalhour": 24,
+          "fromDate": "2023-11-30",
+          "toDate": "2023-12-01",
+          "selectedTime": "03:53"
+        }
+      ],
       "id": 1
     }
   ]

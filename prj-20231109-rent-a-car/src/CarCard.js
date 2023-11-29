@@ -42,6 +42,7 @@ export default class CarCard extends Component {
         bookedCarObj.totalhour = totalhour;
         bookedCarObj.fromDate = this.state.fromDate;
         bookedCarObj.toDate = this.state.toDate;
+        bookedCarObj.selectedTime = this.state.selectedTime;
 
         this.updateAddedCarsId(bookedCarObj);
     }

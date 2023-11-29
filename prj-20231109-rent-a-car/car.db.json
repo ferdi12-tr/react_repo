@@ -31,10 +31,10 @@
         },
         {
           "carId": 2,
-          "totalhour": 24,
-          "fromDate": "2023-11-30",
-          "toDate": "2023-12-01",
-          "selectedTime": "03:53"
+          "fromDate": "2023-12-01",
+          "toDate": "2023-12-02",
+          "selectedTime": "00:01",
+          "totalhour": 24
         }
       ],
       "id": 1

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
-import { Container, Row, Col, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Container, Row, Col, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { loginUserStore } from './redux/store';
+import { loginUser } from './redux/actions';
 import DisplayCar from './Components/DisplayCar';
 
 export default class UpdateCar extends Component {
@@ -10,25 +11,61 @@ export default class UpdateCar extends Component {
         super(props)
         this.state = {
             updateCar: this.props.getUpdateCar(),
-            updateCarInfo: null,
             selectedTime: "",
             fromDate: "",
             toDate: "",
-            totalHour: 0
+            message: "Updated successfully"
         }
         this.setUpdateCar = this.props.setUpdateCar;
     }
 
+    calculateTotalHour = () => {
+        let datetimefrom = Date.parse(this.state.fromDate + " " + this.state.selectedTime + ":00")
+        let datetimeto = Date.parse(this.state.toDate + " " + this.state.selectedTime + ":00")
+
+        let totalhour = (datetimeto - datetimefrom) / (1000 * 3600)
+        return totalhour;
+    }
+
     componentDidMount() {
-        const currentUser = loginUserStore.getState();
-        const updateCar = this.props.getUpdateCar();
+        this.currentUser = loginUserStore.getState();
+        this.updateCar = this.props.getUpdateCar();
 
-        const carInfoToUpdate = currentUser.addedCars.find(car => car.carId === updateCar.id);
+        const carInfoToUpdate = this.currentUser.addedCars.find(car => car.carId === this.updateCar.id);
 
-        this.setState({ updateCarInfo: carInfoToUpdate })
         this.setState({ fromDate: carInfoToUpdate.fromDate })
         this.setState({ toDate: carInfoToUpdate.toDate })
         this.setState({ selectedTime: carInfoToUpdate.selectedTime })
+    }
+
+    updateCarButton = () => {
+        let updatedCarInfo = Object();
+        updatedCarInfo.carId = this.updateCar.id;
+        updatedCarInfo.fromDate = this.state.fromDate;
+        updatedCarInfo.toDate = this.state.toDate;
+        updatedCarInfo.selectedTime = this.state.selectedTime;
+        updatedCarInfo.totalhour = this.calculateTotalHour();
+
+        const addedCars = this.currentUser.addedCars.filter(car => car.carId !== this.updateCar.id);
+        addedCars.push(updatedCarInfo);
+
+
+        const updatedUser = {
+            ...this.currentUser,
+            addedCars: addedCars
+        }
+
+        loginUserStore.dispatch(loginUser(updatedUser))
+
+        fetch(`http://localhost:3000/users/${this.currentUser.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedUser),
+        })
+            .catch(e => this.setState({ message: "Cannot update successfully" }))
+
     }
 
     render() {
@@ -72,6 +109,7 @@ export default class UpdateCar extends Component {
                                             <Input value={this.state.selectedTime} id="alongtime" name="time" placeholder="time placeholder" type="time" onChange={(e) => this.setState({ selectedTime: e.target.value })} />
                                         </Col>
                                     </FormGroup>
+                                    <Button color="success" onClick={this.updateCarButton}>Update</Button>
                                 </Form>
                             </Col>
                         </Row>}

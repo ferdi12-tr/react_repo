@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import logo from './fkoca_logo.svg';
-import { store, loginUserStore } from "./redux/store";
+import { loginUserStore } from "./redux/store";
+//import { store, loginUserStore } from "./redux/store";
 import { loginUser } from './redux/actions';
 
 
@@ -19,7 +20,7 @@ export default class CarNavBar extends Component {
         }
 
         this.setUpdateCar = this.props.setUpdateCar;
-
+        this.setDisplayMap = this.props.setDisplayMap
         //this.unsubscribe = store.subscribe(this.calculateTotal);
         this.unsubscribeLogin = loginUserStore.subscribe(this.whenUpdatedOrLogin);
     }
@@ -121,7 +122,7 @@ export default class CarNavBar extends Component {
                             </NavItem>
 
                             <NavItem>
-                                <NavLink href="#">Gallery</NavLink>
+                                <NavLink href="#" onClick={() => this.setDisplayMap(true)}>Locations</NavLink>
                             </NavItem>
 
                             <NavItem>

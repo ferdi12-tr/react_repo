@@ -24,20 +24,29 @@
       "addedCars": [
         {
           "carId": 1,
-          "totalhour": 24,
-          "fromDate": "2023-11-29",
-          "toDate": "2023-11-30",
-          "selectedTime": "02:49"
-        },
-        {
-          "carId": 2,
           "fromDate": "2023-12-01",
-          "toDate": "2023-12-02",
-          "selectedTime": "00:01",
-          "totalhour": 24
+          "toDate": "2023-12-03",
+          "selectedTime": "19:27",
+          "totalhour": 48
         }
       ],
       "id": 1
+    }
+  ],
+  "locations": [
+    {
+      "locationName": "Architecht Bilişim Sistemleri ve Pazarlama Ticaret A.Ş.",
+      "lat": 40.92314334391547,
+      "lng": 29.31636180797253,
+      "phone": "+905551242815",
+      "email": "location1@info.com"
+    },
+    {
+      "locationName": "Emaar Square AVM",
+      "lat": 41.00380158099206,
+      "lng": 29.071377214883437,
+      "phone": "+905551643815",
+      "email": "location2@info.com"
     }
   ]
 }

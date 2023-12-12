@@ -14,6 +14,9 @@ export default class UpdateCar extends Component {
             selectedTime: "",
             fromDate: "",
             toDate: "",
+            locations: [],
+            pickupLocation: "",
+            returnLocation: "",
             message: "Updated successfully"
         }
         this.setUpdateCar = this.props.setUpdateCar;
@@ -36,6 +39,14 @@ export default class UpdateCar extends Component {
         this.setState({ fromDate: carInfoToUpdate.fromDate })
         this.setState({ toDate: carInfoToUpdate.toDate })
         this.setState({ selectedTime: carInfoToUpdate.selectedTime })
+        this.setState({ pickupLocation: carInfoToUpdate.pickupLocation })
+        this.setState({ returnLocation: carInfoToUpdate.returnLocation })
+
+        fetch("http://localhost:3000/locations")
+            .then(db => db.json())
+            .then(data => {
+                this.setState({ locations: data })
+            })
     }
 
     updateCarButton = () => {
@@ -45,6 +56,8 @@ export default class UpdateCar extends Component {
         updatedCarInfo.toDate = this.state.toDate;
         updatedCarInfo.selectedTime = this.state.selectedTime;
         updatedCarInfo.totalhour = this.calculateTotalHour();
+        updatedCarInfo.pickupLocation = this.state.pickupLocation;
+        updatedCarInfo.returnLocation = this.state.returnLocation;
 
         const addedCars = this.currentUser.addedCars.filter(car => car.carId !== this.updateCar.id);
         addedCars.push(updatedCarInfo);
@@ -109,6 +122,29 @@ export default class UpdateCar extends Component {
                                             <Input value={this.state.selectedTime} id="alongtime" name="time" placeholder="time placeholder" type="time" onChange={(e) => this.setState({ selectedTime: e.target.value })} />
                                         </Col>
                                     </FormGroup>
+
+                                    <FormGroup row>
+                                        <Label sm={4} for="PickUpLocation'">Pick-Up Location</Label>
+                                        <Input sm={8} onChange={e => this.setState({ pickupLocation: e.currentTarget.value })} type="select" name="PickUpLocation" id="PickUpLocation">
+                                            {this.state.locations.map((location, index) => {
+                                                if (location.locationName === this.state.pickupLocation)
+                                                    return <option selected key={index} value={location.locationName}>{location.locationName}</option>
+                                                return <option key={index} value={location.locationName}>{location.locationName}</option>
+                                            })}
+                                        </Input>
+                                    </FormGroup>
+
+                                    <FormGroup row>
+                                        <Label sm={4} for="ReturnLocation'">Return Location</Label>
+                                        <Input sm={8} onChange={e => this.setState({ returnLocation: e.currentTarget.value })} type="select" name="ReturnLocation" id="ReturnLocation">
+                                            {this.state.locations.map((location, index) => {
+                                                if (location.locationName === this.state.returnLocation)
+                                                    return <option selected key={index} value={location.locationName}>{location.locationName}</option>
+                                                return <option key={index} value={location.locationName}>{location.locationName}</option>
+                                            })}
+                                        </Input>
+                                    </FormGroup>
+
                                     <Button color="success" onClick={this.updateCarButton}>Update</Button>
                                 </Form>
                             </Col>

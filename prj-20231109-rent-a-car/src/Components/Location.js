@@ -41,7 +41,7 @@ export default class Location extends Component {
                         <Col xs="4" className='pe-5 pt-5'>
                             {
                                 this.state.locations.map((location, index) =>
-                                    <Row key={index} className='mb-5 pe-auto' onClick={() => this.zoomWhenLocationClicked(location)} style={{ cursor: 'pointer' }}>
+                                    <Row key={index} className='mb-5 pe-auto' onClick={() => console.log(location)} style={{ cursor: 'pointer' }}>
                                         <h4>{location.locationName}</h4>
                                         <p><strong>Phone: </strong>{location.phone}</p>
                                         <p><strong>Email: </strong>{location.email}</p>

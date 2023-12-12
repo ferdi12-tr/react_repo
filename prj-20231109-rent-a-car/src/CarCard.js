@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Card, CardImg, CardImgOverlay, CardTitle, CardText, } from 'reactstrap';
+import { Form, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input, Card, CardImg, CardImgOverlay, CardTitle, CardText, } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { store, loginUserStore } from './redux/store';
@@ -17,7 +17,35 @@ export default class CarCard extends Component {
             selectedTime: "",
             fromDate: "",
             toDate: "",
-            totalHour: 0
+            totalHour: 0,
+            locations: [],
+            pickupLocation: "",
+            returnLocation: "",
+            validationMessage: ""
+        }
+    }
+
+    componentDidMount() {
+        fetch("http://localhost:3000/locations")
+            .then(db => db.json())
+            .then(data => {
+                this.setState({ locations: data })
+            })
+    }
+
+    validateInput = () => {
+        if (!(this.state.selectedTime
+            && this.state.fromDate
+            && this.state.toDate
+            && this.state.pickupLocation
+            && this.state.returnLocation
+        )) {
+            this.setState({ validationMessage: "Please fill in all blanks" })
+            return;
+        }
+        else {
+            this.toggleModal();
+            this.calculateTotalHour();
         }
     }
 
@@ -28,6 +56,9 @@ export default class CarCard extends Component {
         this.setState({ fromDate: "" });
         this.setState({ toDate: "" });
         this.setState({ totalHour: 0 })
+        this.setState({ pickupLocation: "" });
+        this.setState({ returnLocation: "" });
+        this.setState({ validationMessage: "" })
     };
 
     calculateTotalHour = () => {
@@ -43,14 +74,12 @@ export default class CarCard extends Component {
         bookedCarObj.fromDate = this.state.fromDate;
         bookedCarObj.toDate = this.state.toDate;
         bookedCarObj.selectedTime = this.state.selectedTime;
-
+        bookedCarObj.pickupLocation = this.state.pickupLocation;
+        bookedCarObj.returnLocation = this.state.returnLocation;
         this.updateAddedCarsId(bookedCarObj);
     }
 
     updateAddedCarsId = async (bookedCarObj) => {
-
-        // if(!(this.state.selectedTime && this.state.fromDate && this.state.toDate))
-        // return;
         const currentUser = loginUserStore.getState();
 
         const updatedUser = {
@@ -99,21 +128,40 @@ export default class CarCard extends Component {
                                 <p>Be able to book this car, please enter the date to calculate pay amount.</p>
                                 <strong>Car Per Hour Price: {this.state.currentCar.carPrice} $</strong>
                                 <hr />
-                                <FormGroup>
-                                    <Label for="datefrom">Date From: </Label>
-                                    <Input id="datefrom" name="date" placeholder="date placeholder" type="date" onChange={(e) => this.setState({ fromDate: e.target.value })} />
+                                <Form >
+                                    <FormGroup>
+                                        <Label for="datefrom">Date From: </Label>
+                                        <Input id="datefrom" name="date" placeholder="date placeholder" type="date" onChange={(e) => this.setState({ fromDate: e.target.value })} />
 
-                                    <Label for="dateto"> Date To: </Label>
-                                    <Input id="dateto" name="date" placeholder="date placeholder" type="date" onChange={(e) => this.setState({ toDate: e.target.value })} />
+                                        <Label for="dateto"> Date To: </Label>
+                                        <Input id="dateto" name="date" placeholder="date placeholder" type="date" onChange={(e) => this.setState({ toDate: e.target.value })} />
 
-                                    <Label for="alongtime">Time: </Label>
-                                    <Input id="alongtime" name="time" placeholder="time placeholder" type="time" onChange={(e) => this.setState({ selectedTime: e.target.value })} />
+                                        <Label for="alongtime">Time: </Label>
+                                        <Input id="alongtime" name="time" placeholder="time placeholder" type="time" onChange={(e) => this.setState({ selectedTime: e.target.value })} />
 
-                                </FormGroup>
+                                    </FormGroup>
+
+                                    <FormGroup>
+                                        <Label for="PickUpLocation'">Pick-Up Location</Label>
+                                        <Input onChange={e => this.setState({ pickupLocation: e.currentTarget.value })} type="select" name="PickUpLocation" id="PickUpLocation">
+                                            <option value="">Select Pick-Up Location</option>
+                                            {this.state.locations.map((location, index) => <option key={index} value={location.locationName}>{location.locationName}</option>)}
+                                        </Input>
+                                    </FormGroup>
+
+                                    <FormGroup>
+                                        <Label for="ReturnLocation'">Return Location</Label>
+                                        <Input onChange={e => this.setState({ returnLocation: e.currentTarget.value })} type="select" name="ReturnLocation" id="ReturnLocation">
+                                            <option value="">Select Return Location</option>
+                                            {this.state.locations.map((location, index) => <option key={index} value={location.locationName}>{location.locationName}</option>)}
+                                        </Input>
+                                    </FormGroup>
+                                </Form>
                             </ModalBody>
 
+                            <p className="text-danger h5 text-center">{this.state.validationMessage}</p>
                             <ModalFooter>
-                                <Button color="success" onClick={() => { this.calculateTotalHour(); this.toggleModal(); }}>
+                                <Button color="success" onClick={() => { this.validateInput() }}>
                                     Book
                                 </Button>
                                 <Button color="danger" onClick={this.toggleModal}>

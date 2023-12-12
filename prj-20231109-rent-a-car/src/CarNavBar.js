@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Button, Navbar, NavbarBrand, NavbarToggler, Collapse, Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem, NavbarText } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
@@ -21,6 +21,8 @@ export default class CarNavBar extends Component {
 
         this.setUpdateCar = this.props.setUpdateCar;
         this.setDisplayMap = this.props.setDisplayMap
+        this.getCurrentUser = this.props.getCurrentUser;
+        this.setCurrentUser = this.props.setCurrentUser
         //this.unsubscribe = store.subscribe(this.calculateTotal);
         this.unsubscribeLogin = loginUserStore.subscribe(this.whenUpdatedOrLogin);
     }
@@ -110,6 +112,9 @@ export default class CarNavBar extends Component {
                         <img alt="logo" src={logo} style={{ height: 80, width: 80, marginRight: 30 }} />
                         FKoca - Rent A Car
                     </NavbarBrand>
+
+                    {this.getCurrentUser() && <NavbarText className="text-center fs-4">Hii {this.getCurrentUser().name} :)</NavbarText>}
+
                     <NavbarToggler onClick={() => this.setState({ navbarOpen: !this.state.navbarOpen })} />
                     <Collapse isOpen={this.state.navbarOpen} navbar style={{ flexGrow: "0" }}>
                         <Nav className="ml-auto" navbar>
@@ -124,27 +129,30 @@ export default class CarNavBar extends Component {
                             <NavItem>
                                 <NavLink href="#" onClick={() => this.setDisplayMap(true)}>Locations</NavLink>
                             </NavItem>
+                            {
+                                this.getCurrentUser() &&
+                                <>
+                                    <NavItem>
+                                        <NavLink href="#" onClick={() => this.setCurrentUser(null)}>Logout</NavLink>
+                                    </NavItem>
 
-                            <NavItem>
-                                <NavLink href="#">Sign Up</NavLink>
-                            </NavItem>
-
-                            <UncontrolledDropdown nav inNavbar>
-                                <DropdownToggle nav caret>
-                                    {this.state.totalPayAmount}$
-                                </DropdownToggle>
-                                <DropdownMenu end>
-                                    {this.state.carList.map((element, index) =>
-                                        <DropdownItem key={index}>{element.carModel} {element.carBrand}
-                                            <FontAwesomeIcon onClick={() => this.deleteIconNavBar(element)} color='red' className='ms-3 fa-xl' icon={faTrash} />
-                                            <FontAwesomeIcon onClick={() => this.updateIconNavBar(element)} color='yellow' className='ms-3 fa-xl' icon={faPenToSquare} />
-                                        </DropdownItem>
-                                    )}
-                                    <DropdownItem divider />
-                                    <DropdownItem tag="a"><Button onClick={this.removeAllBtnNavBar} size='sm' color='danger' disabled={!(this.state.carList.length > 0)}>Remove All</Button></DropdownItem>
-                                    <DropdownItem tag="a"><Button size='sm' disabled={!(this.state.carList.length > 0)} color='success'>Buy All</Button></DropdownItem>
-                                </DropdownMenu>
-                            </UncontrolledDropdown>
+                                    <UncontrolledDropdown nav inNavbar>
+                                        <DropdownToggle nav caret>
+                                            MyBook {this.state.totalPayAmount}$
+                                        </DropdownToggle>
+                                        <DropdownMenu end>
+                                            {this.state.carList.map((element, index) => <DropdownItem key={index}>{element.carModel} {element.carBrand}
+                                                <FontAwesomeIcon onClick={() => this.deleteIconNavBar(element)} color='red' className='ms-3 fa-xl' icon={faTrash} />
+                                                <FontAwesomeIcon onClick={() => this.updateIconNavBar(element)} color='yellow' className='ms-3 fa-xl' icon={faPenToSquare} />
+                                            </DropdownItem>
+                                            )}
+                                            <DropdownItem divider />
+                                            <DropdownItem tag="a"><Button onClick={this.removeAllBtnNavBar} size='sm' color='danger' disabled={!(this.state.carList.length > 0)}>Remove All</Button></DropdownItem>
+                                            <DropdownItem tag="a"><Button size='sm' disabled={!(this.state.carList.length > 0)} color='success'>Buy All</Button></DropdownItem>
+                                        </DropdownMenu>
+                                    </UncontrolledDropdown>
+                                </>
+                            }
                         </Nav>
                     </Collapse>
                 </Navbar>

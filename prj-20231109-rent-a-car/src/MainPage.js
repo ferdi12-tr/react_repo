@@ -81,7 +81,12 @@ export default class MainPage extends Component {
     render() {
         return (
             <>
-                <CarNavBar setUpdateCar={this.setUpdateCar} setDisplayMap={this.setDisplayMap} />
+                <CarNavBar
+                    setUpdateCar={this.setUpdateCar}
+                    setDisplayMap={this.setDisplayMap}
+                    getCurrentUser={() => this.state.currentUser}
+                    setCurrentUser={this.setCurrentUser}
+                />
                 {this.state.isDisplayMap
                     ?
                     <Location setDisplayMap={this.setDisplayMap} />
@@ -89,7 +94,8 @@ export default class MainPage extends Component {
                     <div className="container">
                         <div className="row mt-3">
                             <div className="col-3">
-                                {this.state.currentUser ?
+                                {this.state.currentUser
+                                    ?
                                     <div>
                                         <input type="text" className="form-control mt-3" value={this.state.carBrand} onChange={(e) => this.setState({ carBrand: e.target.value })} placeholder="Brand" />
                                         <input type="text" className="form-control mt-3" value={this.state.carModel} onChange={(e) => this.setState({ carModel: e.target.value })} placeholder="Model" />

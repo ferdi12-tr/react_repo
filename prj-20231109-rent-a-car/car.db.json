@@ -21,7 +21,17 @@
       "surname": "Koca",
       "username": "fkoca",
       "password": "1234",
-      "addedCars": [],
+      "addedCars": [
+        {
+          "carId": 1,
+          "totalhour": 24,
+          "fromDate": "2023-12-13",
+          "toDate": "2023-12-14",
+          "selectedTime": "19:57",
+          "pickupLocation": "Architecht Bilişim Sistemleri ve Pazarlama Ticaret A.Ş.",
+          "returnLocation": "Emaar Square AVM"
+        }
+      ],
       "id": 1
     }
   ],

@@ -119,13 +119,13 @@ export default class CarNavBar extends Component {
                     <NavbarToggler onClick={() => this.setState({ navbarOpen: !this.state.navbarOpen })} />
                     <Collapse isOpen={this.state.navbarOpen} navbar style={{ flexGrow: "0" }}>
                         <Nav className="ml-auto" navbar>
-
-                            <NavItem>
-                                <NavLink href="#" onClick={() => this.setDisplayMap(true)}>Locations</NavLink>
-                            </NavItem>
                             {
                                 this.getCurrentUser() &&
                                 <>
+                                    <NavItem>
+                                        <NavLink href="#" onClick={() => this.setDisplayMap(true)}>Locations</NavLink>
+                                    </NavItem>
+
                                     <NavItem>
                                         <NavLink href="#" onClick={() => this.setCurrentUser(null)}>Logout</NavLink>
                                     </NavItem>

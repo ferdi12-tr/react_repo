@@ -7,6 +7,7 @@ import logo from './fkoca_logo.svg';
 import { loginUserStore } from "./redux/store";
 //import { store, loginUserStore } from "./redux/store";
 import { loginUser } from './redux/actions';
+import './CustomizeCss.css'
 
 
 export default class CarNavBar extends Component {
@@ -107,7 +108,7 @@ export default class CarNavBar extends Component {
     render() {
         return (
             <div>
-                <Navbar color="light" expand="md">
+                <Navbar expand="md">
                     <NavbarBrand href="#">
                         <img alt="logo" src={logo} style={{ height: 80, width: 80, marginRight: 30 }} />
                         FKoca - Rent A Car

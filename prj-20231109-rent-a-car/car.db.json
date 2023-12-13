@@ -13,6 +13,27 @@
       "carPrice": 15,
       "carUrl": "carImages/car2.jpg",
       "id": 2
+    },
+    {
+      "carBrand": "A3",
+      "carModel": "Audi",
+      "carPrice": "10",
+      "carUrl": "carImages/car3.jpg",
+      "id": 3
+    },
+    {
+      "carBrand": "Ford",
+      "carModel": "Focus",
+      "carPrice": "7",
+      "carUrl": "carImages/car4.jpg",
+      "id": 4
+    },
+    {
+      "carBrand": "Renault",
+      "carModel": "Clio",
+      "carPrice": "8",
+      "carUrl": "carImages/car1.jpg",
+      "id": 5
     }
   ],
   "users": [
@@ -22,15 +43,7 @@
       "username": "fkoca",
       "password": "1234",
       "addedCars": [
-        {
-          "carId": 1,
-          "totalhour": 24,
-          "fromDate": "2023-12-13",
-          "toDate": "2023-12-14",
-          "selectedTime": "19:57",
-          "pickupLocation": "Architecht Bilişim Sistemleri ve Pazarlama Ticaret A.Ş.",
-          "returnLocation": "Emaar Square AVM"
-        }
+        
       ],
       "id": 1
     }
